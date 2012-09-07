@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="30" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tileset-platformer" tilewidth="32" tileheight="32">
+  <image source="tileset-platformer.png" width="192" height="544"/>
+ </tileset>
+ <layer name="Слой тайлов 1" width="50" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WQQ6DMAwEObS9hBOnPon/v6it1EiRRWDtxUmMWMmqRDH2ZBPDPMXX/I/okhyPbzyLePVoytAL6wdSS97jsT5X3VdRJD3uzcGcx1REC46y17PPRY0DPZOadUxEn0idVn4wHKg8OfJaRudoqVE4FjJfy+E1e95k/ih+7AmZWR4cnu+LmiL4gejm8NMifhFlDvkt0jPyezMpcn4M64AxEXkaWXLQ560b15D8rfuPnjEqh9ajGrvVd3ZdrPvK0sMeVyQOtobGb8tcYDjQ/Yf+z6iVH7XrzNw9qnHGbEdrXy0+LJQnnHAXAAA=
+  </data>
+ </layer>
+ <objectgroup name="Слой объектов 1" width="50" height="30">
+  <object x="105" y="74" width="141" height="15"/>
+  <object x="106" y="271" width="166" height="7"/>
+  <object x="364" y="428" width="101" height="9"/>
+  <object x="1" y="4" width="17" height="947"/>
+  <object x="10" y="618" width="1163" height="39"/>
+  <object x="1163" y="585" width="10" height="137"/>
+  <object x="1287" y="457" width="137" height="12"/>
+  <object x="1065" y="395" width="15" height="45"/>
+  <object x="645" y="490" width="112" height="11"/>
+  <object x="421" y="264" width="149" height="17"/>
+  <object x="1451" y="168" width="140" height="23"/>
+  <object x="1481" y="194" width="109" height="25"/>
+  <object x="1512" y="229" width="77" height="21"/>
+  <object x="1544" y="260" width="46" height="24"/>
+  <object x="1572" y="5" width="22" height="626"/>
+  <object x="1223" y="71" width="148" height="13"/>
+  <object x="1257" y="266" width="140" height="12"/>
+  <object x="1001" y="201" width="143" height="12"/>
+  <object x="482" y="104" width="150" height="18"/>
+  <object x="777" y="106" width="174" height="12"/>
+  <object x="711" y="330" width="77" height="9"/>
+  <object x="779" y="235" width="9" height="104"/>
+  <object x="780" y="237" width="104" height="11"/>
+  <object x="27" y="5" width="1546" height="11"/>
+  <object name="heal" x="506" y="72" width="26" height="28"/>
+  <object x="1226" y="587" width="10" height="140"/>
+  <object x="1226" y="615" width="372" height="45"/>
+  <object x="424" y="660" width="13" height="97"/>
+  <object x="519" y="778" width="15" height="149"/>
+  <object x="167" y="711" width="15" height="49"/>
+  <object x="840" y="745" width="15" height="45"/>
+  <object x="1063" y="660" width="16" height="131"/>
+  <object x="1320" y="807" width="12" height="80"/>
+  <object x="1512" y="871" width="79" height="82"/>
+  <object x="1574" y="664" width="16" height="251"/>
+  <object x="8" y="935" width="1579" height="17"/>
+  <object x="23" y="744" width="146" height="14"/>
+  <object x="102" y="843" width="303" height="12"/>
+  <object x="581" y="745" width="274" height="9"/>
+  <object x="840" y="776" width="147" height="16"/>
+  <object x="684" y="907" width="138" height="36"/>
+  <object x="1001" y="841" width="171" height="14"/>
+  <object x="1321" y="806" width="274" height="17"/>
+  <object x="1333" y="825" width="98" height="30"/>
+  <object name="player" x="124" y="44" width="24" height="25"/>
+  <object name="enemy" x="1306" y="589" width="23" height="24"/>
+  <object name="enemy" x="55" y="574" width="23" height="24"/>
+  <object name="enemy" x="52" y="701" width="23" height="24"/>
+  <object name="enemy" x="1468" y="896" width="23" height="24"/>
+  <object name="enemy" x="559" y="894" width="23" height="24"/>
+ </objectgroup>
+</map>
