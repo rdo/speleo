@@ -1,9 +1,5 @@
 package ru.reksoft.platformer.objects.players.npc;
 
-import java.util.Random;
-
-import ru.reksoft.platformer.PlatformerWorld;
-import ru.reksoft.platformer.objects.players.Player;
 
 public class SideToSideStrategy extends AbstractNpcStrategy {
 	

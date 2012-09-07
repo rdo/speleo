@@ -8,7 +8,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import ru.reksoft.platformer.PlatformerWorld;
-import ru.reksoft.platformer.objects.players.Player;
 
 public class Bullet implements DynamicGameObject{
 	

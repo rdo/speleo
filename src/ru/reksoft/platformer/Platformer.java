@@ -19,9 +19,7 @@ import ru.reksoft.platformer.objects.HealingPotion;
 import ru.reksoft.platformer.objects.players.Player;
 import ru.reksoft.platformer.objects.players.npc.Controllable;
 import ru.reksoft.platformer.objects.players.npc.NPC;
-import ru.reksoft.platformer.objects.players.npc.NpcStrategy;
 import ru.reksoft.platformer.objects.players.npc.SideToSideStrategy;
-import ru.reksoft.platformer.objects.players.npc.TurretStrategy;
 
 public class Platformer extends BasicGame {
 	
@@ -87,15 +85,11 @@ public class Platformer extends BasicGame {
 				} else if (name.equals("enemy")) {
 					NPC bot = new NPC(world, x, y, new SideToSideStrategy());
 					npcs.add(bot);
-					
-					//strategy.setNpc(bot);
-					//strategy.setWorld(world);
-					//strategy.setPlayer(player);
 				}
 			}
 		}
 		
-		//игрок может инициализироваться позднее ботов
+		//player could be inited after bots; avoiding npe
 		for(NPC npc:npcs){
 			npc.setPlayer(player);
 		}
