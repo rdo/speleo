@@ -4,7 +4,8 @@ public class TurretStrategy extends AbstractNpcStrategy{
 
 	@Override
 	public void update() {
-		self.shootToPlayer();		
+		self.shootToPlayer();
+		self.getBody().setVelocity(0, 0);
 	}
 
 }

@@ -10,6 +10,7 @@ import ru.reksoft.platformer.objects.players.Player;
 
 public class NPC extends Player implements Controllable{
 	
+	private static final int FIRE_ACCURACY = 50;
 	private static final int FIRE_RANGE = 400;
 	private static final int FIRE_PERIOD = 500;
 	private static final int MAX_HP=1;
@@ -62,7 +63,7 @@ public class NPC extends Player implements Controllable{
 		if(player!=null){
 			if(Math.abs(player.getX()-getX())<FIRE_RANGE){
 				if(System.currentTimeMillis()-lastShoot>FIRE_PERIOD){
-					shootTo((int)player.getX(), (int)player.getY());
+					shootTo((int)player.getX()+r.nextInt()%FIRE_ACCURACY, (int)player.getY()+r.nextInt()%FIRE_ACCURACY);
 					lastShoot=System.currentTimeMillis();
 				}
 				

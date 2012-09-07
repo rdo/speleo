@@ -17,9 +17,9 @@ import org.newdawn.slick.tiled.TiledMap;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.HealingPotion;
 import ru.reksoft.platformer.objects.players.Player;
+import ru.reksoft.platformer.objects.players.npc.AbstractNpcStrategy;
 import ru.reksoft.platformer.objects.players.npc.Controllable;
 import ru.reksoft.platformer.objects.players.npc.NPC;
-import ru.reksoft.platformer.objects.players.npc.SideToSideStrategy;
 
 public class Platformer extends BasicGame {
 	
@@ -83,7 +83,8 @@ public class Platformer extends BasicGame {
 				} else if (name.equals("heal")) {
 					new HealingPotion(world, x, y);
 				} else if (name.equals("enemy")) {
-					NPC bot = new NPC(world, x, y, new SideToSideStrategy());
+					String strategyName=map.getObjectProperty(i, j, "strategy", "SideToSideStrategy");
+					NPC bot = new NPC(world, x, y, AbstractNpcStrategy.createStrategy(strategyName));
 					npcs.add(bot);
 				}
 			}

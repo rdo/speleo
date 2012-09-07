@@ -54,10 +54,61 @@
   <object x="1321" y="806" width="274" height="17"/>
   <object x="1333" y="825" width="98" height="30"/>
   <object name="player" x="124" y="44" width="24" height="25"/>
-  <object name="enemy" x="1306" y="589" width="23" height="24"/>
-  <object name="enemy" x="55" y="574" width="23" height="24"/>
+  <object name="enemy" x="1125" y="581" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="773" y="581" width="23" height="24"/>
   <object name="enemy" x="52" y="701" width="23" height="24"/>
   <object name="enemy" x="1468" y="896" width="23" height="24"/>
   <object name="enemy" x="559" y="894" width="23" height="24"/>
+  <object name="enemy" x="1251" y="582" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="741" y="294" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="1543" y="133" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="1061" y="803" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="867" y="739" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="36" y="899" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="36" y="577" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="heal" x="1537" y="770" width="26" height="28"/>
+  <object name="heal" x="705" y="448" width="26" height="28"/>
+  <object name="enemy" x="485" y="229" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
+  <object name="enemy" x="859" y="71" width="23" height="24">
+   <properties>
+    <property name="strategy" value="TurretStrategy"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
