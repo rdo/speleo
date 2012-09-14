@@ -7,9 +7,9 @@ import ru.reksoft.platformer.objects.DynamicGameObject;
 
 public class DynamicObjectCollisionListener implements WorldListener{
 	
-	private PlatformerWorld world;
+	private PlatformerLevel world;
 	
-	public DynamicObjectCollisionListener(PlatformerWorld world) {
+	public DynamicObjectCollisionListener(PlatformerLevel world) {
 		super();
 		this.world = world;		
 	}

@@ -6,7 +6,7 @@ import org.newdawn.fizzy.Rectangle;
 import org.newdawn.fizzy.Shape;
 import org.newdawn.fizzy.WorldListener;
 
-import ru.reksoft.platformer.objects.players.Player;
+import ru.reksoft.platformer.objects.npc.Person;
 
 public class JumpCollisionListener implements WorldListener{
 
@@ -22,10 +22,10 @@ public void collided(CollisionEvent event) {
 	Body player=null;
 	Body other=null;
 	
-	if(ud1 instanceof Player){
+	if(ud1 instanceof Person){
 		player=event.getBodyA();
 		other=event.getBodyB();
-	} else 	if(ud2 instanceof Player){
+	} else 	if(ud2 instanceof Person){
 		player=event.getBodyB();
 		other=event.getBodyA();
 	} else{
@@ -42,7 +42,7 @@ public void collided(CollisionEvent event) {
 	//System.out.println("Other floor is on "+otherFloorLevel+", player is on "+player.getY());
 	if(otherFloorLevel>player.getY()){
 		//System.out.println("Collision with floor");
-		((Player)player.getUserData()).endJump();
+		((Person)player.getUserData()).endJump();
 	}	
 }
 

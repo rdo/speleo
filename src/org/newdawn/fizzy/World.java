@@ -136,7 +136,7 @@ public class World {
 	/**
 	 * Remove all bodies marked as delayed.
 	 */
-	private void removeDelayedBodies(){
+	private void removeDeleledBodies(){
 		for(Body b: bodiesToRemove){
 			b.removeFromWorld(this);
 		}
@@ -168,13 +168,16 @@ public class World {
 	 * @param timeStep The amount of time to simulate
  	 */
 	public void update(float timeStep) {
+		
+		removeDeleledBodies();
+		
 		jboxWorld.setContinuousPhysics(true);
 		jboxWorld.setPositionCorrection(true);
 		jboxWorld.setWarmStarting(true);
 		
 		jboxWorld.step(timeStep, iterations);
 		//we must delete body after step() is finished, or body will not be removed
-		removeDelayedBodies();
+		
 	}
 	
 	/**

@@ -264,10 +264,10 @@ public class Body {
 	void removeFromWorld(World world) {
 		userData=null;
 		org.jbox2d.dynamics.World jboxWorld = world.getJBoxWorld();
-		//работает не всегда.
-		//если вызов произошелся в момент обработки коллизий, то тело не удалится
-		//потому что заблокирован m_lock
-		//надо дождаться окончания ф-ии step()
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
+		//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_lock
+		//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ-пїЅпїЅ step()
 		jboxWorld.destroyBody(jboxBody);
 	}
 	
@@ -375,5 +375,12 @@ public class Body {
 	public void setAngularVelocity(float vel) {
 		checkBody();
 		jboxBody.setAngularVelocity(vel);
+	}
+	public void setStatic(boolean isStatic){
+		if(isStatic){
+			jboxBody.m_type=org.jbox2d.dynamics.Body.e_staticType;
+		}else{
+			jboxBody.m_type=org.jbox2d.dynamics.Body.e_dynamicType;
+		}
 	}
 }

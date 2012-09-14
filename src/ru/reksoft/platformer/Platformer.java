@@ -1,7 +1,5 @@
 package ru.reksoft.platformer;
 
-import java.util.ArrayList;
-
 import org.newdawn.fizzy.Body;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -15,38 +13,36 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 import ru.reksoft.platformer.objects.DynamicGameObject;
-import ru.reksoft.platformer.objects.HealingPotion;
-import ru.reksoft.platformer.objects.players.Player;
-import ru.reksoft.platformer.objects.players.npc.AbstractNpcStrategy;
-import ru.reksoft.platformer.objects.players.npc.Controllable;
-import ru.reksoft.platformer.objects.players.npc.NPC;
+import ru.reksoft.platformer.objects.LightSource;
+import ru.reksoft.platformer.objects.npc.Controllable;
+import ru.reksoft.platformer.objects.repository.Player;
+
 
 public class Platformer extends BasicGame {
 	
-	private static final int SCREEN_HEIGHT = 768;
-	private static final int SCREEN_WIDTH = 1024;
+	public static final int SCREEN_HEIGHT = 600;
+	public static final int SCREEN_WIDTH = 800;
 	private static final int FRAME_RATE = 20;
 	private static final int X_DISPLACEMENT = SCREEN_WIDTH / 2;
 	private static final int Y_DISPLACEMENT = SCREEN_HEIGHT / 2;
 	
+	private PlatformerLevel world;
+	
+	private FogOfWar fog;
+	
 	private Image background;
-	private PlatformerWorld world;
+	
+	private Player player;
 
 	private int mouseX;
 	private int mouseY;
 	private boolean mousePressed = false;
 
-	private TiledMap map;
-	int mapHeigth;
-	int mapWidth;
-
-	private Player player;
-
 	boolean w_pressed = false;
 	boolean a_pressed = false;
 	boolean s_pressed = false;
 	boolean d_pressed = false;
-
+	
 	GameState currentState = GameState.PLAY;
 
 	public Platformer(String title) {
@@ -56,54 +52,18 @@ public class Platformer extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		
-		ArrayList<NPC> npcs=  new ArrayList<NPC>();
-		map = new TiledMap("data/level1.tmx");
-
-		mapHeigth = map.getHeight() * map.getTileHeight();
-		mapWidth = map.getWidth() * map.getTileWidth();
-		System.out.println(mapWidth + ":" + mapHeigth);
-		background = new Image("data/skybox.jpg");
-		world = new PlatformerWorld(0, 0, mapWidth, mapHeigth, 1, 1);
+		world=new PlatformerLevel(new TiledMap("data/level1.tmx"));
 		world.setGraphics(arg0.getGraphics());
-		// world.yOffset=-mapHeigth+SCREEN_HEIGHT;
-		for (int i = 0; i < map.getObjectGroupCount(); i++) {
-			for (int j = 0; j < map.getObjectCount(i); j++) {
-				int width = map.getObjectWidth(i, j);
-				int height = map.getObjectHeight(i, j);
-				int x = map.getObjectX(i, j);
-				int y = map.getObjectY(i, j);
-				String name = map.getObjectName(i, j);
-				System.out.println(name);
-				if (name == null || name.equals("")) {
-					world.addFloor(x, y, width, height);
-					continue;
-				}
-				if (name.equals("player")) {
-					player = new Player(world, x, y);
-				} else if (name.equals("heal")) {
-					new HealingPotion(world, x, y);
-				} else if (name.equals("enemy")) {
-					String strategyName=map.getObjectProperty(i, j, "strategy", "SideToSideStrategy");
-					NPC bot = new NPC(world, x, y, AbstractNpcStrategy.createStrategy(strategyName));
-					npcs.add(bot);
-				}
-			}
-		}
-		
-		//player could be inited after bots; avoiding npe
-		for(NPC npc:npcs){
-			npc.setPlayer(player);
-		}
-		npcs.clear();
-		
-		world.yOffset = 0;
-		// player = new Player(world, 100, 500);
-		// bot = new SimpleBot(world, 1500, 560);
-		// bot.setPlayer(player);
-		// new HealingPotion(world, 100, 100);
-
 		world.addListener(new JumpCollisionListener());
 		world.addListener(new DynamicObjectCollisionListener(world));
+
+		background=new Image("data/cave.jpg");
+		
+		player=world.getPlayer();
+		
+		fog=new FogOfWar(world);
+
+		
 		arg0.getInput().addKeyListener(new KeyboardListener());
 		arg0.getInput().addMouseListener(new ListenerMouse());
 		
@@ -113,8 +73,9 @@ public class Platformer extends BasicGame {
 
 	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {
+		
 		if(player.getHp()<=0){
-			currentState=GameState.END;
+			//currentState=GameState.END;
 		}
 
 		for (int i = 0; i < world.getBodyCount(); i++) {
@@ -122,6 +83,9 @@ public class Platformer extends BasicGame {
 			Object ud = b.getUserData();
 			if (ud != null && ud instanceof Controllable) {
 				((Controllable) ud).update();
+			}
+			if(ud!=null && ud instanceof LightSource){
+				fog.update((LightSource)ud);
 			}
 		}
 
@@ -160,6 +124,8 @@ public class Platformer extends BasicGame {
 		switch (currentState) {
 		case PLAY:
 			renderWorld(g);
+			fog.render(g);
+			renderUI(g);
 			break;
 		case END:
 			g.drawString("GAME OVER", SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
@@ -169,18 +135,18 @@ public class Platformer extends BasicGame {
 
 	private void renderWorld(Graphics g) {
 		if (player.getX() > X_DISPLACEMENT
-				&& player.getX() < mapWidth - X_DISPLACEMENT) {
+				&& player.getX() < world.mapWidth - X_DISPLACEMENT) {
 			world.xOffset = (int) (player.getX() - X_DISPLACEMENT);
 		}
-		int physY = (int) (mapHeigth - player.getY());
-		if (physY > Y_DISPLACEMENT && physY < mapHeigth - Y_DISPLACEMENT) {
-			int newY = SCREEN_HEIGHT - mapHeigth + (physY - Y_DISPLACEMENT);
+		int physY = (int) (world.mapHeigth - player.getY());
+		if (physY > Y_DISPLACEMENT && physY < world.mapHeigth - Y_DISPLACEMENT) {
+			int newY = SCREEN_HEIGHT - world.mapHeigth + (physY - Y_DISPLACEMENT);
 			world.yOffset = newY;
 		} else if (physY < Y_DISPLACEMENT) {
-			world.yOffset = SCREEN_HEIGHT - mapHeigth;
+			world.yOffset = SCREEN_HEIGHT - world.mapHeigth;
 		}
-
-		map.render(-world.xOffset, world.yOffset);
+		g.drawImage(background, 0, 0);
+		
 
 		int total = world.getBodyCount();
 		for (int i = 0; i < total; i++) {
@@ -192,7 +158,11 @@ public class Platformer extends BasicGame {
 			}
 		}
 		world.drawAsynchEvents();
-		g.drawString("HP: "+player.getHp()+" EXP: "+player.getExp(), 32, 4);
+		world.map.render(-world.xOffset, world.yOffset);
+	}
+	
+	private void renderUI(Graphics g){
+		g.drawString("HP: "+player.getHp()+" EXP: "+player.getExp()+" weapon: "+player.getDefaultBullet().getClass().getSimpleName(), 32, 4);
 	}
 
 	public static void main(String[] args) {
@@ -211,43 +181,34 @@ public class Platformer extends BasicGame {
 	class KeyboardListener implements KeyListener {
 
 		@Override
-		public void setInput(Input paramInput) {
-			// TODO Auto-generated method stub
-
-		}
+		public void setInput(Input paramInput) {}
 
 		@Override
 		public boolean isAcceptingInput() {
-			// TODO Auto-generated method stub
 			return true;
 		}
 
 		@Override
-		public void inputEnded() {
-			// TODO Auto-generated method stub
-
-		}
+		public void inputEnded() {}
 
 		@Override
-		public void inputStarted() {
-			// TODO Auto-generated method stub
-
-		}
+		public void inputStarted() {}
 
 		@Override
 		public void keyPressed(int paramInt, char paramChar) {
-			if (paramChar == 'w')
+			if (paramChar == 'w') {
 				w_pressed = true;
-			if (paramChar == 'a')
+			} else if (paramChar == 'a') {
 				a_pressed = true;
-			if (paramChar == 's')
+			} else if (paramChar == 's') {
 				s_pressed = true;
-			if (paramChar == 'd')
+			} else if (paramChar == 'd') {
 				d_pressed = true;
-			if (paramChar == ' ')
-				player.shoot();
+			}else if(Character.isDigit(paramChar)){
+				int weaponCode=Character.getNumericValue(paramChar);
+				player.setWeapon(weaponCode);
+			}
 			
-
 		}
 
 		@Override
