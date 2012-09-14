@@ -7,6 +7,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ru.reksoft.platformer.ImageRegistry;
+import ru.reksoft.platformer.Images;
 import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.Destructable;
 import ru.reksoft.platformer.objects.DynamicGameObject;
@@ -77,16 +79,17 @@ public class Bullet implements DynamicGameObject{
 	}*/
 
 	@Override
-	public void draw(Graphics g, int x, int y) {
-		g.drawOval(x, y, 2, 2);
-		if(prevX==0 && prevY==0){
-			prevX=x;
-			prevY=y;
-		}			
-		g.drawLine(prevX, prevY, x, y);
+	public void draw(Graphics g, int x, int y) { 
+		g.drawImage(ImageRegistry.getInstance().getImage(Images.bullet), x, y);
+		//g.drawOval(x, y, 2, 2);
+		//if(prevX==0 && prevY==0){
+		//	prevX=x;
+		//	prevY=y;
+		//}			
+		//g.drawLine(prevX, prevY, x, y);
 		
-		prevX=x;
-		prevY=y;
+		//prevX=x;
+		//prevY=y;
 		
 	}
 

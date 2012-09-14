@@ -2,6 +2,8 @@ package ru.reksoft.platformer.objects.repository;
 
 import org.newdawn.slick.Graphics;
 
+import ru.reksoft.platformer.ImageRegistry;
+import ru.reksoft.platformer.Images;
 import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.Destructable;
 import ru.reksoft.platformer.objects.DynamicGameObject;
@@ -14,9 +16,10 @@ public class HealingPotion extends AbstractObject {
 	}
 
 	@Override
-	public void draw(Graphics g, int xOffset, int yOffset) {
+	public void draw(Graphics g, int x, int y) {
+		g.drawImage(ImageRegistry.getInstance().getImage(Images.healingPotion), x, y);
 		//g.drawOval(xOffset, yOffset, 16, 16);
-		g.drawString("+", xOffset, yOffset);
+		//g.drawString("+", xOffset, yOffset);
 
 	}
 

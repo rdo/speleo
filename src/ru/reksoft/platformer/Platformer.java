@@ -20,8 +20,9 @@ import ru.reksoft.platformer.objects.repository.Player;
 
 public class Platformer extends BasicGame {
 	
-	public static final int SCREEN_HEIGHT = 600;
-	public static final int SCREEN_WIDTH = 800;
+	
+	public static final int SCREEN_WIDTH = 1024;
+	public static final int SCREEN_HEIGHT = 768;
 	private static final int FRAME_RATE = 20;
 	private static final int X_DISPLACEMENT = SCREEN_WIDTH / 2;
 	private static final int Y_DISPLACEMENT = SCREEN_HEIGHT / 2;
@@ -57,7 +58,7 @@ public class Platformer extends BasicGame {
 		world.addListener(new JumpCollisionListener());
 		world.addListener(new DynamicObjectCollisionListener(world));
 
-		background=new Image("data/cave.jpg");
+		background=new Image("data/cave2.jpg");
 		
 		player=world.getPlayer();
 		
