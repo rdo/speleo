@@ -10,12 +10,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.tiled.TiledMap;
 
+import ru.reksoft.platformer.objects.npc.NPC;
 import ru.reksoft.platformer.objects.npc.Person;
+import ru.reksoft.platformer.objects.npc.Player;
 import ru.reksoft.platformer.objects.npc.strategies.AbstractNpcStrategy;
 import ru.reksoft.platformer.objects.repository.AbstractObject;
 import ru.reksoft.platformer.objects.repository.HealingPotion;
-import ru.reksoft.platformer.objects.repository.NPC;
-import ru.reksoft.platformer.objects.repository.Player;
 
 public class PlatformerLevel extends World{ 
 	public Player getPlayer() {

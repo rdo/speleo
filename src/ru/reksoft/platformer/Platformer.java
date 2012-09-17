@@ -15,7 +15,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.LightSource;
 import ru.reksoft.platformer.objects.npc.Controllable;
-import ru.reksoft.platformer.objects.repository.Player;
+import ru.reksoft.platformer.objects.npc.Player;
 
 
 public class Platformer extends BasicGame {
@@ -32,9 +32,6 @@ public class Platformer extends BasicGame {
 	private FogOfWar fog;
 	
 	private TiledBackground background;
-	
-	//private Image background;
-	
 	private Player player;
 
 	private int mouseX;
@@ -59,19 +56,15 @@ public class Platformer extends BasicGame {
 		world.setGraphics(arg0.getGraphics());
 		world.addListener(new JumpCollisionListener());
 		world.addListener(new DynamicObjectCollisionListener(world));
-
-		//background=new Image("data/cave.jpg");
 		
 		player=world.getPlayer();
 		
 		fog=new FogOfWar(world);
 		background = new TiledBackground(world.mapWidth, world.mapHeigth);
 
-		
 		arg0.getInput().addKeyListener(new KeyboardListener());
 		arg0.getInput().addMouseListener(new ListenerMouse());
 		
-		System.out.println("inited");
 
 	}
 
@@ -79,7 +72,7 @@ public class Platformer extends BasicGame {
 	public void update(GameContainer arg0, int arg1) throws SlickException {
 		
 		if(player.getHp()<=0){
-			//currentState=GameState.END;
+			currentState=GameState.END;
 		}
 
 		for (int i = 0; i < world.getBodyCount(); i++) {

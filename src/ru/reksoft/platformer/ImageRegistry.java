@@ -13,9 +13,12 @@ public class ImageRegistry {
 	Map<Class, Image> registry = new HashMap<Class, Image>();
 	
 	public Image explosion;
+	
+	public Image player;
 
 	private ImageRegistry() throws SlickException{
 		explosion = new Image("data/explosion.png");
+		player = new Image("data/player.png");
 	}
 	
 	public static synchronized ImageRegistry getInstance(){
@@ -40,7 +43,7 @@ public class ImageRegistry {
 				}
 			
 		}
-		g.drawImage(m, x-m.getWidth()/2, y-m.getHeight()/2);
+		g.drawImage(m, x, y);
 		
 		
 	}

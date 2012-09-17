@@ -15,7 +15,7 @@ public abstract class  Person implements DynamicGameObject, Destructable{
 	public Person(PlatformerLevel world, int x, int y){
 		this.world=world;
 		
-		body= new Body(new Circle(16.0f), x,  y);
+		body= new Body(new Circle(20.0f), x,  y);
 		body.setFriction(0);
 		world.add(body);
 		//TODO: terrible circular dependency
@@ -123,14 +123,14 @@ public abstract class  Person implements DynamicGameObject, Destructable{
 		int xOffset;
 		int yOffset;
 		if(x>body.getX()){
-			xOffset=17;
+			xOffset=25;
 		}else{
-			xOffset=-17;
+			xOffset=-25;
 		}
 		if(y<body.getY()){
-			yOffset=-10;
+			yOffset=-15;
 		}else{
-			yOffset=10;
+			yOffset=15;
 		}
 		
 		int xVel=(int) (x-body.getX());

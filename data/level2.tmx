@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="80" tilewidth="32" tileheight="32">
- <tileset firstgid="103" name="tileset-ground" tilewidth="32" tileheight="32" spacing="1">
+ <tileset firstgid="1" name="tileset-ground" tilewidth="32" tileheight="32" spacing="1">
   <image source="tileset-ground.png" width="296" height="164"/>
  </tileset>
- <tileset firstgid="148" name="steampunkishtilec" tilewidth="32" tileheight="32">
+ <tileset firstgid="46" name="steampunkishtilec" tilewidth="32" tileheight="32">
   <image source="steampunkishtilec.png" width="512" height="512"/>
  </tileset>
  <layer name="level" width="50" height="80">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3UXQqCQBQG0Nlt0A9YWtJb9NpOWkKrSzEhAnWcnCA4Bz58uXeYO47WIYRdk3uTdZP9zLS9vb7/MlCbU/l6PhZc87zgWrHK6ZLZrhnWnHJscnjLNrJvM1J7W2Bfc9Vh+L6PKUJ3BrFz55Zyr9p3UYXuDGLnzi1ljva/dErszSV1L8UXvTl8fuexqWb25rb6UQAAAAAAAAAAAAAAAADgHzwBBZ4XPIA+AAA=
+   H4sIAAAAAAAAC+2Y20oDMRBAI1YLtW4tfRDEV/FH/AT//1vcQANxmCSTy25XOQfmoTa3k+vUs3NuP8fXHLs5nhrDt+GubbwlyrzMcafEuaPf0Obztf9vN45L4u87xcU77BPlLRzcb4+RvGe+k2ve4+AJHqc5jlE8Gus/ZMp+dI5N9nN06TEGD7k3rfPj65+c3bsVuX5+X8Z7qGdf+TmaXNvelvOrzcN9pr4f9yiPcF5r6wb/+JzXrqnvO5673nMu56WE5qC5fDa2Kc+5NaaorpxP7WymHGIXX+7V2e+dsBajQq5Lbfupd1DuXXlHruFR80an7gp5FrTPwdfSXyqfyHks8b6msPan5RN/0cOTcyl5aOd+ZEwVHjmXksehoo9WcvOm3Xmay9Y8tDFaXLbmEfq05A2xi2xDyx2WRo5Te1tyLpYceQ0PmbOm3sieHH0L+0pGi8saHlqfpXyu5CLvvWmpwWaw5F6l38K3mH9JSw6p7c1b0/I/LHlfbcFjBP/FAwAAAAAAAAAAAAAAAAAAAAAAAAAAtsMPwuF0fYA+AAA=
   </data>
  </layer>
  <objectgroup name="objects" width="50" height="80">
   <object name="player" x="63" y="41" width="26" height="26"/>
   <object x="2" y="-1" width="19" height="268"/>
-  <object x="0" y="266" width="856" height="69"/>
+  <object x="0" y="266" width="559" height="105"/>
   <object x="458" y="107" width="43" height="159"/>
   <object x="502" y="135" width="29" height="48"/>
-  <object x="5" y="0" width="525" height="23"/>
-  <object x="617" y="1" width="246" height="21"/>
-  <object x="23" y="104" width="123" height="46"/>
-  <object x="426" y="169" width="32" height="44"/>
+  <object x="5" y="0" width="1585" height="21"/>
+  <object x="23" y="104" width="124" height="47"/>
+  <object x="429" y="168" width="34" height="43"/>
   <object x="678" y="12" width="19" height="93"/>
-  <object name="HealingPotion" x="422" y="239" width="19" height="21"/>
-  <object name="enemy" x="796" y="234" width="24" height="25"/>
+  <object name="HealingPotion" x="36" y="230" width="19" height="21"/>
+  <object name="enemy" x="796" y="238" width="24" height="25"/>
+  <object x="686" y="265" width="613" height="45"/>
+  <object x="499" y="266" width="59" height="323"/>
+  <object x="843" y="233" width="262" height="32"/>
+  <object x="876" y="203" width="198" height="31"/>
+  <object x="911" y="172" width="133" height="30"/>
+  <object x="1161" y="239" width="14" height="27"/>
+  <object x="1198" y="171" width="5" height="10"/>
+  <object x="878" y="23" width="193" height="29"/>
+  <object x="911" y="52" width="131" height="31"/>
+  <object x="687" y="266" width="34" height="297"/>
+  <object x="727" y="314" width="347" height="26"/>
+  <object x="1261" y="269" width="37" height="70"/>
+  <object x="1294" y="107" width="161" height="40"/>
+  <object x="1420" y="108" width="36" height="98"/>
+  <object x="1549" y="11" width="42" height="326"/>
+  <object x="1519" y="236" width="42" height="102"/>
+  <object x="1579" y="338" width="22" height="103"/>
+  <object x="1388" y="298" width="40" height="42"/>
+  <object name="enemy" x="705" y="36" width="24" height="25"/>
+  <object name="enemy" x="1299" y="75" width="24" height="25"/>
+  <object name="enemy" x="1399" y="265" width="24" height="25"/>
+  <object name="LightSpawner" x="626" y="25" width="20" height="22"/>
  </objectgroup>
 </map>

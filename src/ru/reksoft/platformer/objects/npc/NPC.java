@@ -1,4 +1,4 @@
-package ru.reksoft.platformer.objects.repository;
+package ru.reksoft.platformer.objects.npc;
 
 import java.util.Random;
 
@@ -7,8 +7,6 @@ import org.newdawn.slick.Graphics;
 import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.LightSource;
-import ru.reksoft.platformer.objects.npc.Controllable;
-import ru.reksoft.platformer.objects.npc.Person;
 import ru.reksoft.platformer.objects.npc.strategies.NpcStrategy;
 
 public class NPC extends Person implements Controllable{
@@ -16,7 +14,7 @@ public class NPC extends Person implements Controllable{
 	private static final int FIRE_ACCURACY = 50;
 	private static final int FIRE_RANGE = 400;
 	private static final int FIRE_PERIOD = 500;
-	private static final int MAX_HP=1;
+	private static final int MAX_HP=3;
 	public float prevX;
 	public boolean jumped=false;
 	public boolean moveRigth=true;

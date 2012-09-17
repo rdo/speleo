@@ -13,7 +13,7 @@ public abstract class AbstractObject implements DynamicGameObject{
 	
 	public AbstractObject(PlatformerLevel world, int x, int y){
 		this.world=world;
-		body=new Body(new Rectangle(3f, 3f), x, y, true);
+		body=new Body(new Rectangle(10f, 10f), x, y, true);
 		world.add(body);
 		body.setUserData(this);
 	}
