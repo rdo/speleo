@@ -22,7 +22,7 @@ public abstract class  Person implements DynamicGameObject, Destructable{
 		body.setUserData(this);
 	}
 
-	public int MAX_JUMP_COUNT = 1;
+	public int MAX_JUMP_COUNT = 2;
 	public float BULLET_SPEED=40;
 	private Body body;
 	private PlatformerLevel world;

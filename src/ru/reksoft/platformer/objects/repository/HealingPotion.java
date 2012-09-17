@@ -17,9 +17,7 @@ public class HealingPotion extends AbstractObject {
 
 	@Override
 	public void draw(Graphics g, int x, int y) {
-		g.drawImage(ImageRegistry.getInstance().getImage(Images.healingPotion), x, y);
-		//g.drawOval(xOffset, yOffset, 16, 16);
-		//g.drawString("+", xOffset, yOffset);
+		ImageRegistry.getInstance().draw(HealingPotion.class, g, x, y);
 
 	}
 

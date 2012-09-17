@@ -31,7 +31,9 @@ public class Platformer extends BasicGame {
 	
 	private FogOfWar fog;
 	
-	private Image background;
+	private TiledBackground background;
+	
+	//private Image background;
 	
 	private Player player;
 
@@ -53,16 +55,17 @@ public class Platformer extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		
-		world=new PlatformerLevel(new TiledMap("data/level1.tmx"));
+		world=new PlatformerLevel(new TiledMap("data/level2.tmx"));
 		world.setGraphics(arg0.getGraphics());
 		world.addListener(new JumpCollisionListener());
 		world.addListener(new DynamicObjectCollisionListener(world));
 
-		background=new Image("data/cave2.jpg");
+		//background=new Image("data/cave.jpg");
 		
 		player=world.getPlayer();
 		
 		fog=new FogOfWar(world);
+		background = new TiledBackground(world.mapWidth, world.mapHeigth);
 
 		
 		arg0.getInput().addKeyListener(new KeyboardListener());
@@ -124,6 +127,7 @@ public class Platformer extends BasicGame {
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
 		switch (currentState) {
 		case PLAY:
+			background.render(g, world.xOffset, world.yOffset);
 			renderWorld(g);
 			fog.render(g);
 			renderUI(g);
@@ -146,7 +150,7 @@ public class Platformer extends BasicGame {
 		} else if (physY < Y_DISPLACEMENT) {
 			world.yOffset = SCREEN_HEIGHT - world.mapHeigth;
 		}
-		g.drawImage(background, 0, 0);
+		//g.drawImage(background, 0, 0);
 		
 
 		int total = world.getBodyCount();

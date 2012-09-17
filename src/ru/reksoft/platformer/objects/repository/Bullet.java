@@ -50,11 +50,7 @@ public class Bullet implements DynamicGameObject{
 		world.add(body);
 		body.getJBoxBody().setLinearVelocity(new Vec2(xVelocity, yVelocity));
 		body.setUserData(this);
-		try{
-			explosion=new Image("data/explosion.png");
-		}catch(SlickException e){
-			System.out.println("Failed to load explosion image: "+e.getMessage());
-		}
+		explosion=ImageRegistry.getInstance().explosion;
 	}
 	
 	
@@ -62,34 +58,9 @@ public class Bullet implements DynamicGameObject{
 		return body;
 	}
 
-	/*public Bullet(PlatformerLevel world, float x, float y, float xVelocity, float yVelocity){
-		this.world=world;
-		body = new Body(new Circle(1f), x, y);
-		world.add(body);
-		body.getJBoxBody().setLinearVelocity(new Vec2(xVelocity, yVelocity));
-		body.setUserData(this);
-		try{
-			explosion=new Image("data/explosion.png");
-		}catch(SlickException e){
-			System.out.println("Failed to load explosion image: "+e.getMessage());
-		}
-	}
-	public Bullet(PlatformerLevel world){
-		this.world=world;	
-	}*/
-
 	@Override
 	public void draw(Graphics g, int x, int y) { 
-		g.drawImage(ImageRegistry.getInstance().getImage(Images.bullet), x, y);
-		//g.drawOval(x, y, 2, 2);
-		//if(prevX==0 && prevY==0){
-		//	prevX=x;
-		//	prevY=y;
-		//}			
-		//g.drawLine(prevX, prevY, x, y);
-		
-		//prevX=x;
-		//prevY=y;
+		ImageRegistry.getInstance().draw(Bullet.class, g, x, y);
 		
 	}
 
@@ -101,7 +72,7 @@ public class Bullet implements DynamicGameObject{
 		float x = body.getX();
 		float y=body.getY();
 		world.remove(body);
-		world.addAsynchImageEvent(explosion, x, y-20);
+		world.addAsynchImageEvent(explosion, x-explosion.getWidth()/2, y-explosion.getHeight()/2);
 		
 	}
 

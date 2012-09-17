@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="80" tilewidth="32" tileheight="32">
+ <tileset firstgid="103" name="tileset-ground" tilewidth="32" tileheight="32" spacing="1">
+  <image source="tileset-ground.png" width="296" height="164"/>
+ </tileset>
+ <tileset firstgid="148" name="steampunkishtilec" tilewidth="32" tileheight="32">
+  <image source="steampunkishtilec.png" width="512" height="512"/>
+ </tileset>
+ <layer name="level" width="50" height="80">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UXQqCQBQG0Nlt0A9YWtJb9NpOWkKrSzEhAnWcnCA4Bz58uXeYO47WIYRdk3uTdZP9zLS9vb7/MlCbU/l6PhZc87zgWrHK6ZLZrhnWnHJscnjLNrJvM1J7W2Bfc9Vh+L6PKUJ3BrFz55Zyr9p3UYXuDGLnzi1ljva/dErszSV1L8UXvTl8fuexqWb25rb6UQAAAAAAAAAAAAAAAADgHzwBBZ4XPIA+AAA=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="50" height="80">
+  <object name="player" x="63" y="41" width="26" height="26"/>
+  <object x="2" y="-1" width="19" height="268"/>
+  <object x="0" y="266" width="856" height="69"/>
+  <object x="458" y="107" width="43" height="159"/>
+  <object x="502" y="135" width="29" height="48"/>
+  <object x="5" y="0" width="525" height="23"/>
+  <object x="617" y="1" width="246" height="21"/>
+  <object x="23" y="104" width="123" height="46"/>
+  <object x="426" y="169" width="32" height="44"/>
+  <object x="678" y="12" width="19" height="93"/>
+  <object name="HealingPotion" x="422" y="239" width="19" height="21"/>
+  <object name="enemy" x="796" y="234" width="24" height="25"/>
+ </objectgroup>
+</map>

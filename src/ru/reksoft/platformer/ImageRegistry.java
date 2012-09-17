@@ -3,18 +3,21 @@ package ru.reksoft.platformer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class ImageRegistry {
 	
 	private static ImageRegistry instance;
-	Map<Images, Image> registry = new HashMap<Images, Image>();
+	Map<Class, Image> registry = new HashMap<Class, Image>();
+	
+	public Image explosion;
 
 	private ImageRegistry() throws SlickException{
-		registry.put(Images.bullet, new Image("data/bullet.png"));
-		registry.put(Images.healingPotion, new Image("data/healingPotion.png"));
+		explosion = new Image("data/explosion.png");
 	}
+	
 	public static synchronized ImageRegistry getInstance(){
 		if(instance==null){
 			try {
@@ -25,7 +28,20 @@ public class ImageRegistry {
 		}
 		return instance;
 	}
-	public Image getImage(Images image){
-		return registry.get(image);
+	
+	public void draw(Class clazz, Graphics g, float x, float y){
+		Image m = registry.get(clazz);
+		if(m==null){
+				try{
+					m=new Image("data/objects/"+clazz.getSimpleName()+".png");
+					registry.put(clazz, m);
+				}catch(Exception e){
+					return;
+				}
+			
+		}
+		g.drawImage(m, x-m.getWidth()/2, y-m.getHeight()/2);
+		
+		
 	}
 }
