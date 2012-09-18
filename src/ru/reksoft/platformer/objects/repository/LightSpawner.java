@@ -1,6 +1,5 @@
 package ru.reksoft.platformer.objects.repository;
 
-import org.jbox2d.dynamics.Body;
 import org.newdawn.slick.Graphics;
 
 import ru.reksoft.platformer.PlatformerLevel;

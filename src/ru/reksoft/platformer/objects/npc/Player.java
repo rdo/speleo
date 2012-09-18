@@ -3,6 +3,10 @@ package ru.reksoft.platformer.objects.npc;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jbox2d.dynamics.joints.DistanceJointDef;
+import org.jbox2d.dynamics.joints.Joint;
+import org.newdawn.fizzy.Body;
+import org.newdawn.fizzy.Circle;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,9 +16,10 @@ import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.LightSource;
 import ru.reksoft.platformer.objects.repository.Bullet;
 import ru.reksoft.platformer.objects.repository.Flashlight;
+import ru.reksoft.platformer.objects.repository.HookBullet;
 import ru.reksoft.platformer.objects.repository.LightBullet;
 
-public class Player extends Person implements LightSource{
+public class Player extends Person implements LightSource, Controllable{
 	
 	private Class<?> currentWeapon;
 	
@@ -30,6 +35,14 @@ public class Player extends Person implements LightSource{
 	private Animation moveLeft;
 	
 	private Animation moveRight;
+	
+	public boolean onJoint=false;
+
+	private Body hook;
+
+	private Joint joint;
+	//мы храним ее здесь, чтобы в цикле update() опрашивать ее статус.
+	public HookBullet hookBullet;
 
 	@Override
 	public void endJump() {
@@ -45,9 +58,9 @@ public class Player extends Person implements LightSource{
 		for(int i=0;i<10;i++){
 			weapons.add(null);
 		}
-		weapons.add(0, Bullet.class);
-		weapons.add(1, LightBullet.class);
-		weapons.add(2, Flashlight.class);
+		weapons.add(1, Bullet.class);
+		weapons.add(2, LightBullet.class);
+		weapons.add(3, Flashlight.class);
 		currentWeapon=weapons.get(1);
 		Image playerTileset = ImageRegistry.getInstance().player;
 		stopLeft = playerTileset.getSubImage(0, 0, 52, 56);
@@ -58,12 +71,12 @@ public class Player extends Person implements LightSource{
 		
 		moveLeft=new Animation(true);
 		for(int i=0;i<14;i++){
-			moveLeft.addFrame(playerTileset.getSubImage(0, 112+56*i, 52, 56), 100);
+			moveLeft.addFrame(playerTileset.getSubImage(0, 112+56*i, 52, 56), 80);
 		}
 		
 		moveRight=new Animation(true);
 		for(int i=0;i<14;i++){
-			moveRight.addFrame(playerTileset.getSubImage(52, 112+56*i, 52, 56), 100);
+			moveRight.addFrame(playerTileset.getSubImage(52, 112+56*i, 52, 56), 80);
 		}
 		
 		
@@ -71,6 +84,11 @@ public class Player extends Person implements LightSource{
 
 	@Override
 	public void draw(Graphics g, int x, int y) {
+		if(onJoint){
+			g.drawLine(x, y, hook.getX()-world.xOffset, hook.getY()+world.yOffset);
+		}
+		
+		
 		if(looksRight){
 			if(currentState==State.STOP){
 				g.drawImage(stopRight, x-25, y-39);
@@ -120,6 +138,32 @@ public class Player extends Person implements LightSource{
 	@Override
 	public void setRadius(int radius) {
 		lightRadius=radius;
+		
+	}
+	
+	public void createJoint(float x, float y){
+		System.out.println("Creating joint to "+x+" ,"+y);
+		onJoint=true;
+		hook = new Body(new Circle(1f), x, y,true);
+		world.add(hook);
+		DistanceJointDef j = new DistanceJointDef();
+		j.initialize(body.getJBoxBody(), hook.getJBoxBody(), body.getJBoxBody().getWorldCenter(), hook.getJBoxBody().getWorldCenter());
+		j.length=50;
+		joint = world.getJboxWorld().createJoint(j);
+	}
+	public void releaseJoint(){
+		onJoint=false;
+		world.getJboxWorld().destroyJoint(joint);
+		world.remove(hook);
+		
+	}
+
+	@Override
+	public void update() {
+		if(hookBullet!=null && !onJoint){
+			createJoint(hookBullet.x, hookBullet.y);
+			hookBullet=null;
+		}
 		
 	}
 

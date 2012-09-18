@@ -19,7 +19,6 @@ public class TiledBackground {
 	private int[][] tilesMap;
 	
 	public TiledBackground(int width, int height) throws SlickException {
-		super();
 		this.width = width;
 		this.height = height;
 		Image tileSet = new Image("data/background.png");
@@ -42,7 +41,6 @@ public class TiledBackground {
 	}
 
 	public void render(Graphics g, int xOffset, int yOffset) {
-		long start = System.currentTimeMillis();
 		for (int i = 0; i < xCount; i++) {
 			for (int j = 0; j < yCount; j++) {
 
@@ -55,7 +53,6 @@ public class TiledBackground {
 				}
 			}
 		}
-		//System.out.println("Duration: "+(System.currentTimeMillis()-start));
 
 	}
 }

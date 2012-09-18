@@ -22,10 +22,10 @@ public abstract class  Person implements DynamicGameObject, Destructable{
 		body.setUserData(this);
 	}
 
-	public int MAX_JUMP_COUNT = 2;
+	public int MAX_JUMP_COUNT = 1;
 	public float BULLET_SPEED=40;
-	private Body body;
-	private PlatformerLevel world;
+	protected Body body;
+	protected PlatformerLevel world;
 
 	boolean is_jumping = false;
 	boolean allow_next_jump = true;
@@ -73,17 +73,28 @@ public abstract class  Person implements DynamicGameObject, Destructable{
 	}
 	public void stepLeft(){
 		looksRight=false;
-		body.getJBoxBody().setLinearVelocity(new Vec2(-5,body.getYVelocity()));
+		float velo = checkVelocity(body.getXVelocity());
+		body.getJBoxBody().setLinearVelocity(new Vec2(-velo,body.getYVelocity()));
 		if (currentState != State.JUMP){
 		currentState=State.MOVE;
 		}
 	}
 	public void stepRight(){
 		looksRight=true;
-		body.getJBoxBody().setLinearVelocity(new Vec2(5,body.getYVelocity()));
+		float velo = checkVelocity(body.getXVelocity());
+		body.getJBoxBody().setLinearVelocity(new Vec2(velo,body.getYVelocity()));
 		if (currentState != State.JUMP){
 			currentState=State.MOVE;
 		}
+	}
+	private float checkVelocity(float prevVelo) {
+		//float velo=body.getXVelocity();
+		if(Math.abs(prevVelo)<5){
+			prevVelo=5;
+		}else{
+			return Math.abs(prevVelo);
+		}
+		return prevVelo;
 	}
 	public void stopMovement(){
 		body.getJBoxBody().setLinearVelocity(new Vec2(body.getXVelocity()/2,body.getYVelocity()));
@@ -120,6 +131,12 @@ public abstract class  Person implements DynamicGameObject, Destructable{
 	}
 	
 	public void shootTo(int x, int y){
+		Bullet b = getDefaultBullet();
+		shootTo(x, y, b);
+		
+	}
+	
+	public void shootTo(int x, int y, Bullet b){
 		int xOffset;
 		int yOffset;
 		if(x>body.getX()){
@@ -139,7 +156,6 @@ public abstract class  Person implements DynamicGameObject, Destructable{
 		int modReal= xVel*xVel+yVel*yVel;
 		float koeff=(float)Math.sqrt((double)modReal/(double)(BULLET_SPEED*BULLET_SPEED));
 		
-		Bullet b = getDefaultBullet();
 		b.setWorld(world);
 		b.setStartPosition(body.getX()+xOffset, body.getY()+yOffset);
 		b.setVelocity(xVel/koeff, yVel/koeff);

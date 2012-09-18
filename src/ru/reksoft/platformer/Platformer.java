@@ -16,6 +16,7 @@ import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.LightSource;
 import ru.reksoft.platformer.objects.npc.Controllable;
 import ru.reksoft.platformer.objects.npc.Player;
+import ru.reksoft.platformer.objects.repository.HookBullet;
 
 
 public class Platformer extends BasicGame {
@@ -64,6 +65,7 @@ public class Platformer extends BasicGame {
 
 		arg0.getInput().addKeyListener(new KeyboardListener());
 		arg0.getInput().addMouseListener(new ListenerMouse());
+		world.update(1);
 		
 
 	}
@@ -86,10 +88,10 @@ public class Platformer extends BasicGame {
 			}
 		}
 
-		if (mousePressed) {
-			player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
-			mousePressed = false;
-		}
+		//if (mousePressed) {
+		//	player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
+		//	mousePressed = false;
+		//}
 		if (!w_pressed) {
 			player.allowNextJump();
 		}
@@ -106,7 +108,7 @@ public class Platformer extends BasicGame {
 			player.stepRight();
 		}
 
-		if (!d_pressed && !a_pressed) {
+		if (!d_pressed && !a_pressed && !player.onJoint) {
 			player.stopMovement();
 		}
 		if (s_pressed) {
@@ -205,6 +207,12 @@ public class Platformer extends BasicGame {
 			}else if(Character.isDigit(paramChar)){
 				int weaponCode=Character.getNumericValue(paramChar);
 				player.setWeapon(weaponCode);
+			}else if(paramChar=='h'){
+				if(player.onJoint){
+					player.releaseJoint();
+				}else{
+					player.createJoint(300, 100);
+				}
 			}
 			
 		}
@@ -248,11 +256,25 @@ public class Platformer extends BasicGame {
 		}
 
 		@Override
-		public void mouseClicked(int paramInt1, int paramInt2, int paramInt3,
-				int paramInt4) {
-			mouseX = paramInt2;
-			mouseY = paramInt3;
-			mousePressed = true;
+		public void mouseClicked(int paramInt1, int mouseX, int mouseY,
+				int clickCount) {
+			System.out.println(paramInt1);
+			if(paramInt1==0){
+				player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
+			}else if(paramInt1==1){
+				if(player.onJoint){
+					player.releaseJoint();
+				}else{
+					System.out.println("Firing hookBullet");
+					HookBullet h = new HookBullet();
+					h.setPlayer(player);
+					player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset, h);
+					//player.createJoint(mouseX + world.xOffset, mouseY - world.yOffset);
+				}
+				
+			}
+			
+			
 		}
 
 		@Override

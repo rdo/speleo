@@ -15,14 +15,14 @@ import ru.reksoft.platformer.objects.DynamicGameObject;
 
 public class Bullet implements DynamicGameObject{
 	
-	private Image explosion;
+	protected Image explosion;
 	
-	private PlatformerLevel world;
+	protected PlatformerLevel world;
 	
 	private float prevX;
 	private float prevY;
 	
-	private Body body;
+	protected Body body;
 	
 	private float x;
 	private float y;

@@ -35,6 +35,9 @@ public class World {
 	private ArrayList<Body> bodies = new ArrayList<Body>();
 	/** List of bodies which should be removed*/
 	private ArrayList<Body> bodiesToRemove = new ArrayList<Body>();
+	
+	/** List of bodies which should be added*/
+	private ArrayList<Body> bodiesToAdd = new ArrayList<Body>();
 	/** A map from shapes that will be reported from collision to the bodies that own them */
 	private HashMap<org.jbox2d.collision.Shape, Body> shapeMap = new HashMap<org.jbox2d.collision.Shape, Body>();
 	/** The list of listeners to be notified of collision events */
@@ -116,6 +119,7 @@ public class World {
 			shapeMap.put(shapes.get(i), body);
 		}
 		bodies.add(body);
+		
 	}
 
 	/**
@@ -142,6 +146,7 @@ public class World {
 		}
 		bodiesToRemove.clear();
 	}
+	
 	
 	/**
 	 * Get the number of bodies in the world
@@ -170,7 +175,7 @@ public class World {
 	public void update(float timeStep) {
 		
 		removeDeleledBodies();
-		
+	
 		jboxWorld.setContinuousPhysics(true);
 		jboxWorld.setPositionCorrection(true);
 		jboxWorld.setWarmStarting(true);

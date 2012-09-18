@@ -264,10 +264,6 @@ public class Body {
 	void removeFromWorld(World world) {
 		userData=null;
 		org.jbox2d.dynamics.World jboxWorld = world.getJBoxWorld();
-		//�������� �� ������.
-		//���� ����� ����������� � ������ ��������� ��������, �� ���� �� ��������
-		//������ ��� ������������ m_lock
-		//���� ��������� ��������� �-�� step()
 		jboxWorld.destroyBody(jboxBody);
 	}
 	

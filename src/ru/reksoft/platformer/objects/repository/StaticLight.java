@@ -33,6 +33,7 @@ public class StaticLight extends AbstractObject implements LightSource{
 
 	@Override
 	public void collidesWith(DynamicGameObject other) {
+		world.remove(body);
 		
 	}
 
