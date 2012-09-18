@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="jar-all" name="Create  game retistutable for windows platform">
+
+	<property name="target" value="1.6" />
+	<property name="source" value="1.6" />
+
+	<property name="jar.dir" value="dist" />
+	<property name="lib.dir" value="lib" />
+	<property name="data.dir" value="data" />
+	<property name="native.dir" value="native" />
+	
+	<property name="jar.name" value="speleo" />
+
+
+	<property name="main.class" value="ru.reksoft.platformer.Platformer" />
+
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete>
+			<fileset dir="bin">
+			</fileset>
+			<fileset dir="${jar.dir}">
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" depends="clean">
+		<javac debug="false" destdir="bin" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="configure" depends="build">
+		<mkdir dir="${jar.dir}/${lib.dir}" />
+		<mkdir dir="${jar.dir}/${data.dir}" />
+		<mkdir dir="${jar.dir}/${native.dir}" />
+		<copy todir="${jar.dir}/${lib.dir}">
+			<fileset dir="${lib.dir}" />
+		</copy>
+		<copy todir="${jar.dir}/${data.dir}">
+			<fileset dir="${data.dir}" />
+		</copy>
+		<copy todir="${jar.dir}/${native.dir}">
+					<fileset dir="${native.dir}" />
+				</copy>
+	</target>
+
+	<target name="bat">
+		<echo file="${jar.dir}/start.bat">java -Djava.library.path="${native.dir}/" -jar ${jar.name}.jar</echo>
+		
+		<!--<echo file="${jar.dir}/${gateway.jar.name}-run.sh">
+			#!/bin/bash
+			java -jar ${gateway.jar.name}.jar
+		</echo>-->
+
+	</target> 
+
+	<target name="jar-all" depends="configure, bat">
+		
+		<pathconvert property="manifest.classpath" pathsep=" ">
+		    <mapper>
+		      <chainedmapper>
+
+		        <!-- remove absolute path -->
+		        <flattenmapper />
+
+		        <!-- add lib/ prefix -->
+		        <globmapper from="*" to="lib/*" />
+		      </chainedmapper>
+		    </mapper>
+
+		    <path>
+
+		      <!-- lib.home contains all jar files, in several subdirectories -->
+		      <fileset dir="${lib.dir}">
+		        <include name="**/*.jar" />
+		      </fileset>
+		    </path>
+		  </pathconvert>
+		
+		
+		<jar destfile="${jar.dir}/${jar.name}.jar">
+			<manifest>
+				<attribute name="Main-Class" value="${main.class}" />
+				<attribute name="Class-Path" value="${manifest.classpath}" />
+			</manifest>
+			<fileset dir="bin" />
+		</jar>
+	</target>
+
+	<!--<target name="tests" depends="build">
+		<javac debug="false" destdir="bin" source="${source}" target="${target}">
+			<src path="${tests.dir}" />
+			<classpath refid="project.classpath" />
+		</javac>
+		<junit printsummary="on" haltonfailure="yes">
+			<classpath>
+				<pathelement location="bin" />
+				<path refid="project.classpath" />
+			</classpath>
+
+			<formatter type="brief" usefile="true" />
+
+			<batchtest fork="yes" todir="${report.dir}">
+				<fileset dir="${tests.dir}">
+					<include name="**/*Test*.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+		<delete>
+			<fileset dir="${report.dir}" />
+		</delete>
+
+	</target>-->
+
+</project>

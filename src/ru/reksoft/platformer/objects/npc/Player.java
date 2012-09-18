@@ -41,7 +41,6 @@ public class Player extends Person implements LightSource, Controllable{
 	private Body hook;
 
 	private Joint joint;
-	//мы храним ее здесь, чтобы в цикле update() опрашивать ее статус.
 	public HookBullet hookBullet;
 
 	@Override
@@ -144,6 +143,7 @@ public class Player extends Person implements LightSource, Controllable{
 	public void createJoint(float x, float y){
 		System.out.println("Creating joint to "+x+" ,"+y);
 		onJoint=true;
+		currentState=State.JUMP;
 		hook = new Body(new Circle(1f), x, y,true);
 		world.add(hook);
 		DistanceJointDef j = new DistanceJointDef();

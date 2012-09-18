@@ -256,20 +256,17 @@ public class Platformer extends BasicGame {
 		}
 
 		@Override
-		public void mouseClicked(int paramInt1, int mouseX, int mouseY,
+		public void mouseClicked(int clickedBtn, int mouseX, int mouseY,
 				int clickCount) {
-			System.out.println(paramInt1);
-			if(paramInt1==0){
+			if(clickedBtn==0){
 				player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
-			}else if(paramInt1==1){
+			}else if(clickedBtn==1){
 				if(player.onJoint){
 					player.releaseJoint();
 				}else{
-					System.out.println("Firing hookBullet");
-					HookBullet h = new HookBullet();
-					h.setPlayer(player);
-					player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset, h);
-					//player.createJoint(mouseX + world.xOffset, mouseY - world.yOffset);
+					HookBullet hook = new HookBullet();
+					hook.setPlayer(player);
+					player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset, hook);
 				}
 				
 			}
