@@ -3,9 +3,9 @@ package ru.reksoft.platformer.objects.repository;
 import org.newdawn.fizzy.Body;
 import org.newdawn.slick.Graphics;
 
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.LightSource;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class StaticLight extends AbstractObject implements LightSource{
 	

@@ -2,9 +2,9 @@ package ru.reksoft.platformer.objects.repository;
 
 import org.newdawn.slick.Graphics;
 
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.npc.Controllable;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class LightSpawner extends AbstractObject implements Controllable {
 	

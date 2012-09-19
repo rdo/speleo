@@ -2,9 +2,9 @@ package ru.reksoft.platformer.objects.npc.strategies;
 
 import java.util.Random;
 
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.npc.NPC;
 import ru.reksoft.platformer.objects.npc.Person;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public abstract class AbstractNpcStrategy implements NpcStrategy {
 	

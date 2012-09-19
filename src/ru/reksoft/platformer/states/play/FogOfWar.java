@@ -1,13 +1,12 @@
-package ru.reksoft.platformer;
+package ru.reksoft.platformer.states.play;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
+import ru.reksoft.platformer.Platformer;
 import ru.reksoft.platformer.objects.LightSource;
-import ru.reksoft.platformer.objects.npc.Person;
 
 public class FogOfWar {
 	

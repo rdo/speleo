@@ -6,6 +6,8 @@ import ru.reksoft.platformer.objects.npc.Controllable;
 
 public class Flashlight extends Bullet implements LightSource, Controllable {
 	
+	
+
 	private int radius=1;
 	
 	private int jumpCounter=1;

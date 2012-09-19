@@ -3,8 +3,8 @@ package ru.reksoft.platformer.objects.repository;
 import org.newdawn.fizzy.Body;
 import org.newdawn.fizzy.Rectangle;
 
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.DynamicGameObject;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public abstract class AbstractObject implements DynamicGameObject{
 

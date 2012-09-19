@@ -1,4 +1,4 @@
-package ru.reksoft.platformer;
+package ru.reksoft.platformer.states.play;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.tiled.TiledMap;
 
 import ru.reksoft.platformer.objects.npc.NPC;
-import ru.reksoft.platformer.objects.npc.Person;
 import ru.reksoft.platformer.objects.npc.Player;
 import ru.reksoft.platformer.objects.npc.strategies.AbstractNpcStrategy;
 import ru.reksoft.platformer.objects.repository.AbstractObject;
-import ru.reksoft.platformer.objects.repository.HealingPotion;
 
 public class PlatformerLevel extends World{ 
 	public Player getPlayer() {

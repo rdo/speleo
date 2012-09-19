@@ -12,12 +12,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import ru.reksoft.platformer.ImageRegistry;
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.LightSource;
 import ru.reksoft.platformer.objects.repository.Bullet;
 import ru.reksoft.platformer.objects.repository.Flashlight;
 import ru.reksoft.platformer.objects.repository.HookBullet;
 import ru.reksoft.platformer.objects.repository.LightBullet;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class Player extends Person implements LightSource, Controllable{
 	

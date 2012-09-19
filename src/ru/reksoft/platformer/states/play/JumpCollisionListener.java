@@ -1,4 +1,4 @@
-package ru.reksoft.platformer;
+package ru.reksoft.platformer.states.play;
 
 import org.newdawn.fizzy.Body;
 import org.newdawn.fizzy.CollisionEvent;

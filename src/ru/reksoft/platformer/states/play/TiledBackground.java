@@ -1,10 +1,12 @@
-package ru.reksoft.platformer;
+package ru.reksoft.platformer.states.play;
 
 import java.util.Random;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
+import ru.reksoft.platformer.Platformer;
 
 public class TiledBackground {
 	

@@ -5,10 +5,10 @@ import org.newdawn.fizzy.Body;
 import org.newdawn.fizzy.Circle;
 import org.newdawn.slick.Graphics;
 
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.Destructable;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.repository.Bullet;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public abstract class  Person implements DynamicGameObject, Destructable{
 	

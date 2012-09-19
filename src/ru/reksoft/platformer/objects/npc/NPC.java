@@ -4,10 +4,9 @@ import java.util.Random;
 
 import org.newdawn.slick.Graphics;
 
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.DynamicGameObject;
-import ru.reksoft.platformer.objects.LightSource;
 import ru.reksoft.platformer.objects.npc.strategies.NpcStrategy;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class NPC extends Person implements Controllable{
 	

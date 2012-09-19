@@ -1,6 +1,6 @@
 package ru.reksoft.platformer.objects.repository;
 
-import ru.reksoft.platformer.PlatformerLevel;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class DynamicLight extends StaticLight {
 

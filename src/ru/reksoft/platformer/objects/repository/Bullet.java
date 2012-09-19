@@ -5,22 +5,17 @@ import org.newdawn.fizzy.Body;
 import org.newdawn.fizzy.Circle;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 import ru.reksoft.platformer.ImageRegistry;
-import ru.reksoft.platformer.Images;
-import ru.reksoft.platformer.PlatformerLevel;
 import ru.reksoft.platformer.objects.Destructable;
 import ru.reksoft.platformer.objects.DynamicGameObject;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class Bullet implements DynamicGameObject{
 	
 	protected Image explosion;
 	
 	protected PlatformerLevel world;
-	
-	private float prevX;
-	private float prevY;
 	
 	protected Body body;
 	
