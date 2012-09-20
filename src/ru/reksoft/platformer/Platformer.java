@@ -21,6 +21,10 @@ public class Platformer extends StateBasedGame {
 	 public static final int MAIN_MENU_STATE = 0;
 	 public static final int GAMEPLAY_STATE = 1;
 	 public static final int PAUSE_STATE=2;
+	 public static final int LOAD_GAME=3;
+	 
+	 private static GameProgress gameProgress = new GameProgress();
+	 
 
 	public Platformer(String title) {
 		super(title);
@@ -42,7 +46,7 @@ public class Platformer extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer arg0) throws SlickException {
 		addState(new MainMenuState(MAIN_MENU_STATE));
-        addState(new PlayState(GAMEPLAY_STATE));
+        addState(new PlayState(GAMEPLAY_STATE, new GameProgress()));
         addState(new ContinueGameState(PAUSE_STATE));
         //enterState(GAMEPLAYSTATE);
 		

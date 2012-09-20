@@ -12,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import ru.reksoft.platformer.states.menu.buttons.ExitButton;
 import ru.reksoft.platformer.states.menu.buttons.AbstractMenuButton;
 import ru.reksoft.platformer.states.menu.buttons.NewGameButton;
+import ru.reksoft.platformer.states.menu.buttons.ToLoadMenuButton;
 
 public class MainMenuState extends BasicGameState{
 	
@@ -49,17 +50,8 @@ public class MainMenuState extends BasicGameState{
 			throws SlickException {
 		
 		addButton(new NewGameButton());
+		addButton(new ToLoadMenuButton());
 		addButton(new ExitButton());
-		
-		//NewGameButton b1 = new NewGameButton();
-		//b1.setPosition(350, 300);
-		//b1.setSize(100, 25);
-		//menu.add(b1);
-		
-		//ExitButton b2 = new ExitButton();
-		//b2.setSize(100, 25);
-		//b2.setPosition(350, 350);
-		//menu.add(b2);
 		
 	}
 

@@ -57,9 +57,9 @@ public class Player extends Person implements LightSource, Controllable{
 		for(int i=0;i<10;i++){
 			weapons.add(null);
 		}
-		weapons.add(1, Bullet.class);
-		weapons.add(2, LightBullet.class);
-		weapons.add(3, Flashlight.class);
+		//weapons.add(1, Bullet.class);
+		weapons.add(1, LightBullet.class);
+		weapons.add(2, Flashlight.class);
 		currentWeapon=weapons.get(1);
 		Image playerTileset = ImageRegistry.getInstance().player;
 		stopLeft = playerTileset.getSubImage(0, 0, 52, 56);
@@ -165,6 +165,9 @@ public class Player extends Person implements LightSource, Controllable{
 			hookBullet=null;
 		}
 		
+	}
+	public void setHP(int hp){
+		super.hp=hp;
 	}
 
 }

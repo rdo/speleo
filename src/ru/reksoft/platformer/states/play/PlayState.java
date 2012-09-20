@@ -8,6 +8,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
+import ru.reksoft.platformer.GameProgress;
 import ru.reksoft.platformer.Platformer;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.LightSource;
@@ -30,7 +31,7 @@ public class PlayState extends BasicGameState {
 	private TiledBackground background;
 	
 	private Player player;
-
+	
 	boolean w_pressed = false;
 	boolean a_pressed = false;
 	boolean s_pressed = false;
@@ -38,17 +39,22 @@ public class PlayState extends BasicGameState {
 	
 	private int stateId;
 	
+	private GameProgress progress;
+	
 	private boolean exitToMenu=false;
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		world=new PlatformerLevel(new TiledMap("data/level2.tmx"));
+		world=new PlatformerLevel(new TiledMap(progress.currentLevel));
 		world.setGraphics(arg0.getGraphics());
 		world.addListener(new JumpCollisionListener());
 		world.addListener(new DynamicObjectCollisionListener(world));
 		
 		player=world.getPlayer();
+		
+		player.setHP(progress.hp);
+		player.setExp(progress.exp);
 		
 		fog=new FogOfWar(world);
 		background = new TiledBackground(world.mapWidth, world.mapHeigth);
@@ -72,7 +78,7 @@ public class PlayState extends BasicGameState {
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		
+		//TODO: сделать переход на следующий уровень
 		if(exitToMenu){
 			arg1.enterState(Platformer.PAUSE_STATE);
 			exitToMenu=false;
@@ -130,9 +136,10 @@ public class PlayState extends BasicGameState {
 		return stateId;
 	}
 	
-	public PlayState(int stateId) {
+	public PlayState(int stateId, GameProgress progress) {
 		super();
 		this.stateId = stateId;
+		this.progress=progress;
 	}
 
 	private void renderWorld(Graphics g) {
@@ -213,6 +220,12 @@ public class PlayState extends BasicGameState {
 		if (paramChar == 'd')
 			d_pressed = false;
 
+	}
+
+	public GameProgress getProgress() {
+		progress.hp=player.getHp();
+		progress.exp=player.getExp();
+		return progress;
 	}
 
 }
