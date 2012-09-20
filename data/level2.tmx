@@ -8,14 +8,14 @@
  </tileset>
  <layer name="level" width="50" height="80">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2Y20oDMRBAI1YLtW4tfRDEV/FH/AT//1vcQANxmCSTy25XOQfmoTa3k+vUs3NuP8fXHLs5nhrDt+GubbwlyrzMcafEuaPf0Obztf9vN45L4u87xcU77BPlLRzcb4+RvGe+k2ve4+AJHqc5jlE8Gus/ZMp+dI5N9nN06TEGD7k3rfPj65+c3bsVuX5+X8Z7qGdf+TmaXNvelvOrzcN9pr4f9yiPcF5r6wb/+JzXrqnvO5673nMu56WE5qC5fDa2Kc+5NaaorpxP7WymHGIXX+7V2e+dsBajQq5Lbfupd1DuXXlHruFR80an7gp5FrTPwdfSXyqfyHks8b6msPan5RN/0cOTcyl5aOd+ZEwVHjmXksehoo9WcvOm3Xmay9Y8tDFaXLbmEfq05A2xi2xDyx2WRo5Te1tyLpYceQ0PmbOm3sieHH0L+0pGi8saHlqfpXyu5CLvvWmpwWaw5F6l38K3mH9JSw6p7c1b0/I/LHlfbcFjBP/FAwAAAAAAAAAAAAAAAAAAAAAAAAAAtsMPwuF0fYA+AAA=
+   H4sIAAAAAAAAC+2YWWrDMBCGpzRpwNnJQ6HktfQiPULvf5bK1APOoFm0OIbyfzAvkaPRb80i60pEu2TfyTbJ9pU2zkHTHB/KM5dkL8muDX60OY+T/x/qx035fTP5PSrjNQz0qKMnd2Ns1LIzxkthHedkh5m9Bf+/NZ79bF7do58D6WtkHTJWo+9q/P+Z4rprkTkr47IlrsZ3dKK/d1AaI9Y+Mq/G2LjuXjpq85X1t+SkzK/WPJfvxYM1eD6/KueUeR61E+n5kctN9uf5fKd43eG9aDUtP0rn1/qiF7u9dGg+BmNt1llA4vUarmWXoD/u/SU6luivGlF/XJ/W1GHV6xJ/OS3P1GHFWKk/qWXNuJrXRNmTZL3M7eNcy5o65ucVWddysWNpKdGR6ylej9g645Y/WZO1XmfFa25MqxXevkbOHLkza6639DrX5s6uvXTInqz1yCXO6N46S3R4cSWt5DvLi23eHys+I99Eg/KbpSO6L3zf0PMbVqNGR8m3sHbf8AxqzpBa/Fr3DUtTc4elxU7P+wYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4Dv0kF2V2APgAA
   </data>
  </layer>
  <objectgroup name="objects" width="50" height="80">
-  <object name="player" x="253" y="82" width="26" height="26"/>
+  <object name="player" x="49" y="54" width="26" height="26"/>
   <object x="2" y="-1" width="19" height="268"/>
-  <object x="0" y="266" width="559" height="105"/>
-  <object x="458" y="107" width="43" height="159"/>
+  <object x="0" y="266" width="533" height="45"/>
+  <object x="458" y="107" width="44" height="456"/>
   <object x="502" y="135" width="29" height="48"/>
   <object x="5" y="0" width="1585" height="21"/>
   <object x="23" y="104" width="124" height="47"/>
@@ -24,14 +24,13 @@
   <object name="HealingPotion" x="36" y="230" width="19" height="21"/>
   <object name="enemy" x="796" y="238" width="24" height="25"/>
   <object x="686" y="265" width="613" height="45"/>
-  <object x="499" y="266" width="59" height="323"/>
-  <object x="843" y="233" width="262" height="32"/>
-  <object x="876" y="203" width="198" height="31"/>
-  <object x="911" y="172" width="133" height="30"/>
+  <object x="843" y="233" width="103" height="32"/>
+  <object x="876" y="203" width="70" height="28"/>
+  <object x="911" y="172" width="35" height="30"/>
   <object x="1161" y="239" width="14" height="27"/>
   <object x="1198" y="171" width="5" height="10"/>
-  <object x="878" y="23" width="193" height="29"/>
-  <object x="911" y="52" width="131" height="31"/>
+  <object x="878" y="23" width="72" height="26"/>
+  <object x="912" y="48" width="38" height="31"/>
   <object x="687" y="266" width="34" height="297"/>
   <object x="727" y="314" width="347" height="26"/>
   <object x="1261" y="269" width="37" height="70"/>
@@ -40,10 +39,18 @@
   <object x="1549" y="11" width="42" height="326"/>
   <object x="1519" y="236" width="42" height="102"/>
   <object x="1579" y="338" width="22" height="103"/>
-  <object x="1388" y="298" width="40" height="42"/>
-  <object name="enemy" x="705" y="36" width="24" height="25"/>
+  <object x="1356" y="394" width="40" height="42"/>
+  <object name="enemy" x="872" y="65" width="24" height="25"/>
   <object name="enemy" x="1299" y="75" width="24" height="25"/>
-  <object name="enemy" x="1399" y="265" width="24" height="25"/>
-  <object name="LightSpawner" x="626" y="25" width="20" height="22"/>
+  <object name="enemy" x="1089" y="323" width="24" height="25"/>
+  <object name="LightSpawner" x="615" y="5" width="20" height="22"/>
+  <object x="1484" y="454" width="114" height="49"/>
+  <object x="1260" y="522" width="72" height="137"/>
+  <object x="844" y="522" width="232" height="40"/>
+  <object x="878" y="562" width="198" height="34"/>
+  <object x="1006" y="597" width="70" height="60"/>
+  <object x="717" y="651" width="69" height="39"/>
+  <object x="748" y="690" width="6" height="89"/>
+  <object x="142" y="717" width="416" height="73"/>
  </objectgroup>
 </map>

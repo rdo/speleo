@@ -5,9 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.Transition;
 import org.newdawn.slick.tiled.TiledMap;
 
 import ru.reksoft.platformer.Platformer;
@@ -76,12 +74,17 @@ public class PlayState extends BasicGameState {
 			throws SlickException {
 		
 		if(exitToMenu){
-			arg1.enterState(Platformer.MAINMENUSTATE);
+			arg1.enterState(Platformer.PAUSE_STATE);
 			exitToMenu=false;
 		}
 		
 		if(player.getHp()<=0){
-			arg1.enterState(Platformer.MAINMENUSTATE);
+			arg1.enterState(Platformer.MAIN_MENU_STATE);
+		}
+		
+		if(player.getX()<0 ||player.getX()>world.mapWidth || player.getY()<0 || player.getY()>world.mapHeigth ){
+			//outside the map. game over
+			arg1.enterState(Platformer.MAIN_MENU_STATE);
 		}
 		
 		for (int i = 0; i < world.getBodyCount(); i++) {
@@ -162,6 +165,7 @@ public class PlayState extends BasicGameState {
 	
 	private void renderUI(Graphics g){
 		g.drawString("HP: "+player.getHp()+" EXP: "+player.getExp()+" weapon: "+player.getDefaultBullet().getClass().getSimpleName(), 32, 4);
+		g.drawString("Player position: "+player.getBody().getX()+", "+player.getBody().getY(), 32,24);
 	}
 	
 	@Override

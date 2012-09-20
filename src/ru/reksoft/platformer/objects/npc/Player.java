@@ -46,8 +46,8 @@ public class Player extends Person implements LightSource, Controllable{
 	@Override
 	public void endJump() {
 		float yVelocity = getBody().getYVelocity();
-		if(yVelocity>21){
-			changeHp(-1);
+		if(yVelocity>31){
+			changeHp(-999);
 		}
 		super.endJump();
 	}
@@ -161,7 +161,7 @@ public class Player extends Person implements LightSource, Controllable{
 	@Override
 	public void update() {
 		if(hookBullet!=null && !onJoint){
-			createJoint(hookBullet.x, hookBullet.y);
+			createJoint(hookBullet.xCollision, hookBullet.yCollision);
 			hookBullet=null;
 		}
 		
