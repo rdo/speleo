@@ -15,7 +15,7 @@ public class Platformer extends StateBasedGame {
 	
 	public static final int SCREEN_WIDTH = 1024;
 	public static final int SCREEN_HEIGHT = 768;
-	private static final int FRAME_RATE = 20;
+	private static final int FRAME_RATE = 25;
 	
 	
 	 public static final int MAIN_MENU_STATE = 0;
