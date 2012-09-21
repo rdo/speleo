@@ -2,107 +2,107 @@ package ru.reksoft.platformer.objects.npc;
 
 import java.util.Random;
 
+import org.newdawn.fizzy.Body;
 import org.newdawn.slick.Graphics;
 
+import ru.reksoft.platformer.CharacterInfo;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.npc.strategies.NpcStrategy;
 import ru.reksoft.platformer.states.play.PlatformerLevel;
 
-public class NPC extends Person implements Controllable{
-	
-	private static final int FIRE_ACCURACY = 50;
-	private static final int FIRE_RANGE = 400;
-	private static final int FIRE_PERIOD = 500;
-	private static final int MAX_HP=3;
+public class NPC extends Person implements Controllable {
+	//TODO: move to pojo-class or create new class for each enemy?
+	private static int FIRE_ACCURACY = 50;
+	private static int FIRE_RANGE = 400;
+	private static int FIRE_PERIOD = 500;
+	private static int MAX_HP = 3;
 	public float prevX;
-	public boolean jumped=false;
-	public boolean moveRigth=true;
-	//int hp=MAX_HP;
-	
+	public boolean jumped = false;
+	public boolean moveRigth = true;
+	// int hp=MAX_HP;
+
 	int startX;
 	int startY;
-	
+
 	private Person player;
-	
+
 	private long lastShoot;
-	
-	private NpcStrategy strategy;	
-	
-	
+
+	private NpcStrategy strategy;
+
 	Random r = new Random();
 
 	public NPC(PlatformerLevel world, int x, int y, NpcStrategy strategy) {
-		super(world, x, y);
-		prevX=x;
-		lastShoot=System.currentTimeMillis();
-		startX=x;
-		startY=y;
-		hp=MAX_HP;
-		
-		//strategy = new SideToSideStrategy();
+		super(world, x, y, new CharacterInfo());
+		prevX = x;
+		lastShoot = System.currentTimeMillis();
+		startX = x;
+		startY = y;
+
 		strategy.setNpc(this);
 		strategy.setPlayer(player);
 		strategy.setWorld(world);
-		this.strategy=strategy;
-		
-		super.BULLET_SPEED=40;
+		this.strategy = strategy;
+
+		stats.hp = 3;
+		stats.bulletSpeed = 50;
 	}
 
 	@Override
 	public void collidesWith(DynamicGameObject other) {
-		
+
 	}
 
 	@Override
 	public void update() {
 		strategy.update();
-		
+
 	}
 
 	public void shootToPlayer() {
-		if(player!=null){
-			if(Math.abs(player.getX()-getX())<FIRE_RANGE){
-				if(System.currentTimeMillis()-lastShoot>FIRE_PERIOD){
-					shootTo((int)player.getX()+r.nextInt()%FIRE_ACCURACY, (int)player.getY()+r.nextInt()%FIRE_ACCURACY);
-					lastShoot=System.currentTimeMillis();
+		if (player != null) {
+			if (Math.abs(player.getX() - getX()) < FIRE_RANGE) {
+				if (System.currentTimeMillis() - lastShoot > FIRE_PERIOD) {
+					shootTo((int) player.getX() + r.nextInt() % FIRE_ACCURACY,
+							(int) player.getY() + r.nextInt() % FIRE_ACCURACY);
+					lastShoot = System.currentTimeMillis();
 				}
-				
+
 			}
 		}
 	}
+
 	public void move() {
-			moveFromSideToSide();
+		moveFromSideToSide();
 	}
 
 	private void moveFromSideToSide() {
-		if(moveRigth){
+		if (moveRigth) {
 			stepRight();
-		} else{
+		} else {
 			stepLeft();
 		}
 	}
 
 	private void followPlayer() {
-		if(getX()>player.getX()){
+		if (getX() > player.getX()) {
 			stepLeft();
-		}else{
+		} else {
 			stepRight();
 		}
-	}
-	private void restart(){
-		hp=MAX_HP;
-		super.getBody().setPosition(startX, startY);
 	}
 
 	@Override
 	public void draw(Graphics g, int x, int y) {
 		super.draw(g, x, y);
-		g.drawString(Integer.toString(hp)+"/"+Integer.toString(MAX_HP)+" hp", x-16, y-24);
+		g.drawString(
+				Integer.toString(stats.hp) + "/" + Integer.toString(MAX_HP)
+						+ " hp", x - 16, y - 24);
 	}
 
 	@Override
 	public String toString() {
-		return "SimpleBot: moveRigtht="+moveRigth+" state="+currentState;
+		return "SimpleBot: moveRigtht=" + moveRigth + " state=" + currentState;
 	}
 
 	public void setPlayer(Person player) {
@@ -112,16 +112,16 @@ public class NPC extends Person implements Controllable{
 	@Override
 	public void changeHp(int value) {
 		super.changeHp(value);
-		if(getHp()<=0){
+		if (getHp() <= 0) {
 			onDeath();
 		}
 	}
 
 	@Override
 	public void onDeath() {
-		strategy=null;
+		strategy = null;
 		getWorld().remove(getBody());
-		player.setExp(player.getExp()+1);
+		player.setExp(player.getExp() + 1);
 	}
 
 }

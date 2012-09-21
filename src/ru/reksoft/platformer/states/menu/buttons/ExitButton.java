@@ -12,7 +12,7 @@ public class ExitButton extends AbstractMenuButton {
 	}
 
 	public ExitButton() {
-		text="exit";
+		text = "exit";
 	}
 
 }

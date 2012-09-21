@@ -8,6 +8,7 @@
 	<property name="lib.dir" value="lib" />
 	<property name="data.dir" value="data" />
 	<property name="native.dir" value="native" />
+	<property name="saves.dir" value="saves" />
 	
 	<property name="jar.name" value="speleo" />
 
@@ -40,6 +41,7 @@
 		<mkdir dir="${jar.dir}/${lib.dir}" />
 		<mkdir dir="${jar.dir}/${data.dir}" />
 		<mkdir dir="${jar.dir}/${native.dir}" />
+		<mkdir dir="${jar.dir}/${saves.dir}" />
 		<copy todir="${jar.dir}/${lib.dir}">
 			<fileset dir="${lib.dir}" />
 		</copy>

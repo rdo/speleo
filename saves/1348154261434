@@ -1,7 +1,0 @@
-<ru.reksoft.platformer.GameProgress>
-  <currentLevel>data/level1.tmx</currentLevel>
-  <hp>6</hp>
-  <exp>5</exp>
-  <speed>5</speed>
-  <jumpPower>20</jumpPower>
-</ru.reksoft.platformer.GameProgress>

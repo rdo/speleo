@@ -8,7 +8,7 @@ import ru.reksoft.platformer.states.menu.buttons.ContinueButton;
 import ru.reksoft.platformer.states.menu.buttons.SaveButton;
 import ru.reksoft.platformer.states.menu.buttons.ToMainMenuButton;
 
-public class ContinueGameState extends MainMenuState{
+public class ContinueGameState extends MainMenuState {
 
 	public ContinueGameState(int id) {
 		super(id);
@@ -21,7 +21,5 @@ public class ContinueGameState extends MainMenuState{
 		addButton(new SaveButton());
 		addButton(new ToMainMenuButton());
 	}
-	
-	
 
 }

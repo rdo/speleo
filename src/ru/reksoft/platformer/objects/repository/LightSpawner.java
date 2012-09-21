@@ -7,35 +7,31 @@ import ru.reksoft.platformer.objects.npc.Controllable;
 import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class LightSpawner extends AbstractObject implements Controllable {
-	
-	private int period=0;
-	private int MAX_PERIOD=3000;
-	
+
+	private int period = 0;
+	private int MAX_PERIOD = 3000;
+
 	private long previousCall;
-	
-	
+
 	public LightSpawner(PlatformerLevel world, int x, int y) {
 		super(world, x, y);
 		body.setStatic(true);
-		previousCall=System.currentTimeMillis();
-		
-		
+		previousCall = System.currentTimeMillis();
 
 	}
 
-	
-
 	@Override
 	public void update() {
-		
-		if(period>MAX_PERIOD){
-			//spawn light
-			DynamicLight light = new DynamicLight(world, (int)body.getX(), (int)body.getY()+10);
-			period=0;
-			
-		}else{
-			period+=(System.currentTimeMillis()-previousCall);
-			previousCall=System.currentTimeMillis();
+
+		if (period > MAX_PERIOD) {
+			// spawn light
+			DynamicLight light = new DynamicLight(world, (int) body.getX(),
+					(int) body.getY() + 10);
+			period = 0;
+
+		} else {
+			period += (System.currentTimeMillis() - previousCall);
+			previousCall = System.currentTimeMillis();
 		}
 
 	}

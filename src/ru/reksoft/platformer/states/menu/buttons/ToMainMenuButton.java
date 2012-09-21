@@ -14,7 +14,7 @@ public class ToMainMenuButton extends AbstractMenuButton {
 	}
 
 	public ToMainMenuButton() {
-		text="back to main menu";
+		text = "back to main menu";
 	}
 
 }

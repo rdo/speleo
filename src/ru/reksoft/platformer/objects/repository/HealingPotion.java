@@ -9,8 +9,8 @@ import ru.reksoft.platformer.objects.npc.Person;
 import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public class HealingPotion extends AbstractObject {
-	
-	public HealingPotion(PlatformerLevel world, int x, int y){
+
+	public HealingPotion(PlatformerLevel world, int x, int y) {
 		super(world, x, y);
 	}
 
@@ -22,9 +22,9 @@ public class HealingPotion extends AbstractObject {
 
 	@Override
 	public void collidesWith(DynamicGameObject other) {
-		if(other instanceof Person){
-			((Destructable)other).changeHp(5);
-			System.out.println(other.toString()+" healed");
+		if (other instanceof Person) {
+			((Destructable) other).changeHp(5);
+			System.out.println(other.toString() + " healed");
 			world.remove(body);
 		}
 

@@ -16,14 +16,17 @@ public abstract class PolygonBasedShape extends PrimitiveShape<PolygonDef> {
 	public PolygonBasedShape() {
 		super(new PolygonDef());
 	}
-	
+
 	/**
-	 * Move the rectangle away from the center of it's potential body. The rectangle will still 
-	 * be positioned based on it's center but will be offset from the body's center by the given 
-	 * value, and rotated by the angle given.
+	 * Move the rectangle away from the center of it's potential body. The
+	 * rectangle will still be positioned based on it's center but will be
+	 * offset from the body's center by the given value, and rotated by the
+	 * angle given.
 	 * 
-	 * @param x The horizontal axis offset
-	 * @param y The vertical axis offset
+	 * @param x
+	 *            The horizontal axis offset
+	 * @param y
+	 *            The vertical axis offset
 	 * @param angle
 	 * @return This rectangle for chaining operations
 	 */
@@ -31,19 +34,22 @@ public abstract class PolygonBasedShape extends PrimitiveShape<PolygonDef> {
 		xoffset = x;
 		yoffset = y;
 		angleOffset = angle;
-		applyOffset(x,y,angle);
+		applyOffset(x, y, angle);
 		return this;
 	}
-	
+
 	/**
 	 * It's up to the subclass to apply the offset as it needs to
 	 * 
-	 * @param x The xoffset to apply
-	 * @param y The yoffset to apply
-	 * @param angle The angle to apply
+	 * @param x
+	 *            The xoffset to apply
+	 * @param y
+	 *            The yoffset to apply
+	 * @param angle
+	 *            The angle to apply
 	 */
 	protected abstract void applyOffset(float x, float y, float angle);
-	
+
 	/**
 	 * Get the horizontal axis offset from the body's center
 	 * 

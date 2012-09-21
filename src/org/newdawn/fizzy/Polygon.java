@@ -93,24 +93,27 @@ public class Polygon extends PolygonBasedShape {
 	}
 
 	/**
-	 * Move the rectangle away from the center of it's potential body. The rectangle will still 
-	 * be positioned based on it's center but will be offset from the body's center by the given 
-	 * value, and rotated by the angle given.
+	 * Move the rectangle away from the center of it's potential body. The
+	 * rectangle will still be positioned based on it's center but will be
+	 * offset from the body's center by the given value, and rotated by the
+	 * angle given.
 	 * 
-	 * @param x The horizontal axis offset
-	 * @param y The vertical axis offset
+	 * @param x
+	 *            The horizontal axis offset
+	 * @param y
+	 *            The vertical axis offset
 	 * @param angle
 	 * @return This rectangle for chaining operations
 	 */
 	public PolygonBasedShape setOffset(float x, float y, float angle) {
-		applyOffset(-xoffset,-yoffset,-angleOffset);
+		applyOffset(-xoffset, -yoffset, -angleOffset);
 		xoffset = x;
 		yoffset = y;
 		angleOffset = angle;
-		applyOffset(x,y,angle);
+		applyOffset(x, y, angle);
 		return this;
 	}
-	
+
 	@Override
 	protected void applyOffset(float x, float y, float angle) {
 		final XForm xf = new XForm();

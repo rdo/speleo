@@ -11,12 +11,12 @@ public class ToLoadMenuButton extends AbstractMenuButton {
 
 	public ToLoadMenuButton() {
 		super();
-		text="load game";
+		text = "load game";
 	}
 
 	@Override
 	public void onClick(GameContainer gc, StateBasedGame game) {
-		
+
 		try {
 			LoadState state = new LoadState(Platformer.LOAD_GAME);
 			state.init(gc, game);

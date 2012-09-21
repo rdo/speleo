@@ -10,93 +10,115 @@ import org.jbox2d.dynamics.contacts.ContactPoint;
 import org.jbox2d.dynamics.contacts.ContactResult;
 
 /**
- * The central object of the simulation. The world contains the bodies (and joints) which
- * model the world and react to the physics engine.
+ * The central object of the simulation. The world contains the bodies (and
+ * joints) which model the world and react to the physics engine.
  * 
  * @author kevin
  */
 public class World {
 	/** The default gravity applied if none is specified (-10) */
 	public static final float DEFAULT_GRAVITY = -10;
-	/** The default left hand bound of the physics world if none is specified (-200) */
+	/**
+	 * The default left hand bound of the physics world if none is specified
+	 * (-200)
+	 */
 	public static final float DEFAULT_LEFT_BOUND = -200;
-	/** The default right hand bound of the physics world if none is specified (200) */
+	/**
+	 * The default right hand bound of the physics world if none is specified
+	 * (200)
+	 */
 	public static final float DEFAULT_RIGHT_BOUND = 200;
 	/** The default top bound of the physics world if none is specified (-200) */
 	public static final float DEFAULT_TOP_BOUND = -200;
 	/** The default bottom bound of the physics world if none is specified (200) */
 	public static final float DEFAULT_BOTTOM_BOUND = 200;
-	/** The default number of iteration used in the integration if none specified (10) */
+	/**
+	 * The default number of iteration used in the integration if none specified
+	 * (10)
+	 */
 	public static final float DEFAULT_ITERATIONS = 10;
-	
+
 	/** The JBox2D world this World object is wrapping */
 	private org.jbox2d.dynamics.World jboxWorld;
 	/** The list of bodies added to the world */
 	private ArrayList<Body> bodies = new ArrayList<Body>();
-	/** List of bodies which should be removed*/
+	/** List of bodies which should be removed */
 	private ArrayList<Body> bodiesToRemove = new ArrayList<Body>();
-	
-	/** List of bodies which should be added*/
+
+	/** List of bodies which should be added */
 	private ArrayList<Body> bodiesToAdd = new ArrayList<Body>();
-	/** A map from shapes that will be reported from collision to the bodies that own them */
+	/**
+	 * A map from shapes that will be reported from collision to the bodies that
+	 * own them
+	 */
 	private HashMap<org.jbox2d.collision.Shape, Body> shapeMap = new HashMap<org.jbox2d.collision.Shape, Body>();
 	/** The list of listeners to be notified of collision events */
 	private ArrayList<WorldListener> listeners = new ArrayList<WorldListener>();
 	/** The number of iterations to integrate over */
 	private int iterations;
-	
+
 	/**
 	 * Create a new world simulation
 	 * 
-	 * @param iterations The number of iterations to apply integration across, higher number
-	 * becomes more accurate but slower.
+	 * @param iterations
+	 *            The number of iterations to apply integration across, higher
+	 *            number becomes more accurate but slower.
 	 */
 	public World(int iterations) {
-		this(DEFAULT_LEFT_BOUND,DEFAULT_TOP_BOUND,DEFAULT_RIGHT_BOUND,DEFAULT_BOTTOM_BOUND
-				 ,DEFAULT_GRAVITY, iterations);
+		this(DEFAULT_LEFT_BOUND, DEFAULT_TOP_BOUND, DEFAULT_RIGHT_BOUND,
+				DEFAULT_BOTTOM_BOUND, DEFAULT_GRAVITY, iterations);
 	}
-	
+
 	/**
 	 * Create a new world simulation with default settings
 	 */
 	public World() {
-		this(DEFAULT_LEFT_BOUND,DEFAULT_TOP_BOUND,DEFAULT_RIGHT_BOUND,DEFAULT_BOTTOM_BOUND
-			 ,DEFAULT_GRAVITY, DEFAULT_ITERATIONS);
+		this(DEFAULT_LEFT_BOUND, DEFAULT_TOP_BOUND, DEFAULT_RIGHT_BOUND,
+				DEFAULT_BOTTOM_BOUND, DEFAULT_GRAVITY, DEFAULT_ITERATIONS);
 	}
 
 	/**
-	 * Create a new world simulation 
+	 * Create a new world simulation
 	 * 
-	 * @param worldWidth The width of the physics world
-	 * @param worldHeight The height of the physics world
+	 * @param worldWidth
+	 *            The width of the physics world
+	 * @param worldHeight
+	 *            The height of the physics world
 	 */
 	public World(float worldWidth, float worldHeight) {
-		this(-worldWidth/2,-worldHeight/2,worldWidth/2,worldHeight/2
-			 ,DEFAULT_GRAVITY, DEFAULT_ITERATIONS);
+		this(-worldWidth / 2, -worldHeight / 2, worldWidth / 2,
+				worldHeight / 2, DEFAULT_GRAVITY, DEFAULT_ITERATIONS);
 	}
-	
+
 	/**
 	 * Create a new world simulation
 	 * 
-	 * @param x1 The left bound of the physics world
-	 * @param y1 The top bound of the physics world
-	 * @param x2 The right bound of the physics world
-	 * @param y2 The bottom bound of the physics world
-	 * @param g The gravity to apply
-	 * @param iterations The number of iterations to integrate over
+	 * @param x1
+	 *            The left bound of the physics world
+	 * @param y1
+	 *            The top bound of the physics world
+	 * @param x2
+	 *            The right bound of the physics world
+	 * @param y2
+	 *            The bottom bound of the physics world
+	 * @param g
+	 *            The gravity to apply
+	 * @param iterations
+	 *            The number of iterations to integrate over
 	 */
-	public World(float x1, float y1, float x2, float y2, float g, float iterations) {
+	public World(float x1, float y1, float x2, float y2, float g,
+			float iterations) {
 		this.iterations = 10;
-		
+
 		AABB m_worldAABB = new AABB();
 		m_worldAABB.lowerBound = new Vec2(x1, y1);
 		m_worldAABB.upperBound = new Vec2(x2, y2);
 		Vec2 gravity = new Vec2(0.0f, g);
 		boolean doSleep = false;
 		jboxWorld = new org.jbox2d.dynamics.World(m_worldAABB, gravity, doSleep);
-		jboxWorld.setContactListener(new ProxyContactListener());		
+		jboxWorld.setContactListener(new ProxyContactListener());
 	}
-	
+
 	/**
 	 * Get the JBox2D world that is being wrapped
 	 * 
@@ -105,49 +127,53 @@ public class World {
 	org.jbox2d.dynamics.World getJBoxWorld() {
 		return jboxWorld;
 	}
-	
+
 	/**
 	 * Add a body to the world
 	 * 
-	 * @param body The body to be added to the world
+	 * @param body
+	 *            The body to be added to the world
 	 */
 	public void add(Body body) {
 		body.addToWorld(this);
-		ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape().getJBoxShapes();
-		
-		for (int i=0;i<shapes.size();i++) {
+		ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape()
+				.getJBoxShapes();
+
+		for (int i = 0; i < shapes.size(); i++) {
 			shapeMap.put(shapes.get(i), body);
 		}
 		bodies.add(body);
-		
+
 	}
 
 	/**
 	 * Remove a body from the world
 	 * 
-	 * @param body The body to be removed from the world
+	 * @param body
+	 *            The body to be removed from the world
 	 */
 	public void remove(Body body) {
-		ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape().getJBoxShapes();
-		
-		for (int i=0;i<shapes.size();i++) {
+		ArrayList<org.jbox2d.collision.Shape> shapes = body.getShape()
+				.getJBoxShapes();
+
+		for (int i = 0; i < shapes.size(); i++) {
 			shapeMap.remove(shapes.get(i));
 		}
-		//body.removeFromWorld(this);
+		// body.removeFromWorld(this);
 		bodiesToRemove.add(body);
 		bodies.remove(body);
 	}
+
 	/**
 	 * Remove all bodies marked as delayed.
 	 */
-	private void removeDeleledBodies(){
-		for(Body b: bodiesToRemove){
+	private void removeDeleledBodies() {
+		for (Body b : bodiesToRemove) {
 			b.removeFromWorld(this);
 		}
 		bodiesToRemove.clear();
 	}
-	
-	
+
 	/**
 	 * Get the number of bodies in the world
 	 * 
@@ -156,39 +182,43 @@ public class World {
 	public int getBodyCount() {
 		return bodies.size();
 	}
-	
+
 	/**
 	 * Get a body at a particular index in the list of bodies
 	 * 
-	 * @param index The index of the body to retrieve
+	 * @param index
+	 *            The index of the body to retrieve
 	 * @return The body at the given index
 	 */
 	public Body getBody(int index) {
 		return bodies.get(index);
 	}
-	
+
 	/**
 	 * Update the world
 	 * 
-	 * @param timeStep The amount of time to simulate
- 	 */
+	 * @param timeStep
+	 *            The amount of time to simulate
+	 */
 	public void update(float timeStep) {
-		
+
 		removeDeleledBodies();
-	
+
 		jboxWorld.setContinuousPhysics(true);
 		jboxWorld.setPositionCorrection(true);
 		jboxWorld.setWarmStarting(true);
-		
+
 		jboxWorld.step(timeStep, iterations);
-		//we must delete body after step() is finished, or body will not be removed
-		
+		// we must delete body after step() is finished, or body will not be
+		// removed
+
 	}
-	
+
 	/**
 	 * Add a listener to be notified of collisions
 	 * 
-	 * @param listener The listener to be notified of collisions
+	 * @param listener
+	 *            The listener to be notified of collisions
 	 */
 	public void addListener(WorldListener listener) {
 		listeners.add(listener);
@@ -197,21 +227,24 @@ public class World {
 	/**
 	 * Remove a listener that will no longer receive events
 	 * 
-	 * @param listener The listener to be removed
+	 * @param listener
+	 *            The listener to be removed
 	 */
 	public void removeListener(WorldListener listener) {
 		listeners.remove(listener);
 	}
-	
+
 	/**
 	 * Fire a notification to all listeners that a collision has occured
 	 * 
-	 * @param bodyA The first body in the collision
-	 * @param bodyB The second body in the collision
+	 * @param bodyA
+	 *            The first body in the collision
+	 * @param bodyB
+	 *            The second body in the collision
 	 */
 	private void fireCollision(Body bodyA, Body bodyB) {
 		CollisionEvent event = new CollisionEvent(bodyA, bodyB);
-		for (int i=0;i<listeners.size();i++) {
+		for (int i = 0; i < listeners.size(); i++) {
 			listeners.get(i).collided(event);
 		}
 	}
@@ -219,19 +252,21 @@ public class World {
 	/**
 	 * Fire a notification to all listeners that a separation has occured
 	 * 
-	 * @param bodyA The first body in the separation
-	 * @param bodyB The second body in the separation
+	 * @param bodyA
+	 *            The first body in the separation
+	 * @param bodyB
+	 *            The second body in the separation
 	 */
 	private void fireSeparated(Body bodyA, Body bodyB) {
 		CollisionEvent event = new CollisionEvent(bodyA, bodyB);
-		for (int i=0;i<listeners.size();i++) {
+		for (int i = 0; i < listeners.size(); i++) {
 			listeners.get(i).separated(event);
-		}	
+		}
 	}
-	
+
 	/**
-	 * A contact listener to collect effects and proxy them on to 
-	 * world listeners
+	 * A contact listener to collect effects and proxy them on to world
+	 * listeners
 	 * 
 	 * @author kevin
 	 */
@@ -241,11 +276,11 @@ public class World {
 		public void add(ContactPoint point) {
 			Body bodyA = shapeMap.get(point.shape1);
 			Body bodyB = shapeMap.get(point.shape2);
-			
+
 			if ((bodyA != null) && (bodyB != null)) {
 				bodyA.touch(bodyB);
 				bodyB.touch(bodyA);
-				
+
 				if (bodyA.touchCount(bodyB) == 1) {
 					fireCollision(bodyA, bodyB);
 				}
@@ -260,11 +295,11 @@ public class World {
 		public void remove(ContactPoint point) {
 			Body bodyA = shapeMap.get(point.shape1);
 			Body bodyB = shapeMap.get(point.shape2);
-			
+
 			if ((bodyA != null) && (bodyB != null)) {
 				bodyA.untouch(bodyB);
 				bodyB.untouch(bodyA);
-				
+
 				if (bodyA.touchCount(bodyB) == 0) {
 					fireSeparated(bodyA, bodyB);
 				}
@@ -274,7 +309,7 @@ public class World {
 		@Override
 		public void result(ContactResult point) {
 		}
-		
+
 	}
 
 	public org.jbox2d.dynamics.World getJboxWorld() {

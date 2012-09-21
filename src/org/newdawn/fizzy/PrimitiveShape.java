@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import org.jbox2d.collision.ShapeDef;
 
 /**
- * A primitive shape handling adding to the world and configuration of physics 
+ * A primitive shape handling adding to the world and configuration of physics
  * properties.
  * 
  * @author kevin
- *
- * @param <T> A shape definition for the primitive
+ * 
+ * @param <T>
+ *            A shape definition for the primitive
  */
 public abstract class PrimitiveShape<T extends ShapeDef> implements Shape {
 	/** The array list that contains this shape */
@@ -21,7 +22,7 @@ public abstract class PrimitiveShape<T extends ShapeDef> implements Shape {
 	protected T def;
 	/** The body this shape is being used in if any */
 	protected Body body;
-	
+
 	/**
 	 * The body this shape is being used in if any
 	 * 
@@ -30,16 +31,17 @@ public abstract class PrimitiveShape<T extends ShapeDef> implements Shape {
 	public Body getBody() {
 		return body;
 	}
-	
+
 	/**
-	 * Create a new primitive shape 
+	 * Create a new primitive shape
 	 * 
-	 * @param localDef The shape definition backing this fizzy shape
+	 * @param localDef
+	 *            The shape definition backing this fizzy shape
 	 */
 	protected PrimitiveShape(T localDef) {
 		this.def = localDef;
 	}
-	
+
 	@Override
 	public void createInBody(Body body) {
 		this.body = body;

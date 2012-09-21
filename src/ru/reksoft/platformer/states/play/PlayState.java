@@ -17,50 +17,49 @@ import ru.reksoft.platformer.objects.npc.Player;
 import ru.reksoft.platformer.objects.repository.HookBullet;
 
 public class PlayState extends BasicGameState {
-	
-	
-	
 
 	private static final int X_DISPLACEMENT = Platformer.SCREEN_WIDTH / 2;
 	private static final int Y_DISPLACEMENT = Platformer.SCREEN_HEIGHT / 2;
-	
+
 	private PlatformerLevel world;
-	
+
 	private FogOfWar fog;
-	
+
 	private TiledBackground background;
-	
+
 	private Player player;
-	
+
 	boolean w_pressed = false;
 	boolean a_pressed = false;
 	boolean s_pressed = false;
 	boolean d_pressed = false;
-	
+
 	private int stateId;
-	
+
 	private GameProgress progress;
-	
-	private boolean exitToMenu=false;
+
+	private boolean exitToMenu = false;
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
 			throws SlickException {
-		world=new PlatformerLevel(new TiledMap(progress.currentLevel));
+		world = new PlatformerLevel(new TiledMap(progress.currentLevel),
+				progress.player);
 		world.setGraphics(arg0.getGraphics());
 		world.addListener(new JumpCollisionListener());
 		world.addListener(new DynamicObjectCollisionListener(world));
-		
-		player=world.getPlayer();
-		
-		player.setHP(progress.hp);
-		player.setExp(progress.exp);
-		
-		fog=new FogOfWar(world);
+
+		player = world.getPlayer();
+
+		player.setStats(progress.player);
+		// player.setHP(progress.hp);
+		// player.setExp(progress.exp);
+
+		fog = new FogOfWar(world);
 		background = new TiledBackground(world.mapWidth, world.mapHeigth);
 
 		world.update(1);
-		
+
 		System.out.println("Play state inited");
 
 	}
@@ -78,29 +77,31 @@ public class PlayState extends BasicGameState {
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		//TODO: сделать переход на следующий уровень
-		if(exitToMenu){
+		// TODO: here should be next level loading
+
+		if (exitToMenu) {
 			arg1.enterState(Platformer.PAUSE_STATE);
-			exitToMenu=false;
+			exitToMenu = false;
 		}
-		
-		if(player.getHp()<=0){
+
+		if (player.getHp() <= 0) {
 			arg1.enterState(Platformer.MAIN_MENU_STATE);
 		}
-		
-		if(player.getX()<0 ||player.getX()>world.mapWidth || player.getY()<0 || player.getY()>world.mapHeigth ){
-			//outside the map. game over
+
+		if (player.getX() < 0 || player.getX() > world.mapWidth
+				|| player.getY() < 0 || player.getY() > world.mapHeigth) {
+			// outside the map. game over
 			arg1.enterState(Platformer.MAIN_MENU_STATE);
 		}
-		
+
 		for (int i = 0; i < world.getBodyCount(); i++) {
 			Body b = world.getBody(i);
 			Object ud = b.getUserData();
 			if (ud != null && ud instanceof Controllable) {
 				((Controllable) ud).update();
 			}
-			if(ud!=null && ud instanceof LightSource){
-				fog.update((LightSource)ud);
+			if (ud != null && ud instanceof LightSource) {
+				fog.update((LightSource) ud);
 			}
 		}
 
@@ -135,11 +136,11 @@ public class PlayState extends BasicGameState {
 	public int getID() {
 		return stateId;
 	}
-	
+
 	public PlayState(int stateId, GameProgress progress) {
 		super();
 		this.stateId = stateId;
-		this.progress=progress;
+		this.progress = progress;
 	}
 
 	private void renderWorld(Graphics g) {
@@ -149,13 +150,13 @@ public class PlayState extends BasicGameState {
 		}
 		int physY = (int) (world.mapHeigth - player.getY());
 		if (physY > Y_DISPLACEMENT && physY < world.mapHeigth - Y_DISPLACEMENT) {
-			int newY = Platformer.SCREEN_HEIGHT - world.mapHeigth + (physY - Y_DISPLACEMENT);
+			int newY = Platformer.SCREEN_HEIGHT - world.mapHeigth
+					+ (physY - Y_DISPLACEMENT);
 			world.yOffset = newY;
 		} else if (physY < Y_DISPLACEMENT) {
 			world.yOffset = Platformer.SCREEN_HEIGHT - world.mapHeigth;
 		}
-		//g.drawImage(background, 0, 0);
-		
+		// g.drawImage(background, 0, 0);
 
 		int total = world.getBodyCount();
 		for (int i = 0; i < total; i++) {
@@ -169,27 +170,32 @@ public class PlayState extends BasicGameState {
 		world.drawAsynchEvents();
 		world.map.render(-world.xOffset, world.yOffset);
 	}
-	
-	private void renderUI(Graphics g){
-		g.drawString("HP: "+player.getHp()+" EXP: "+player.getExp()+" weapon: "+player.getDefaultBullet().getClass().getSimpleName(), 32, 4);
-		g.drawString("Player position: "+player.getBody().getX()+", "+player.getBody().getY(), 32,24);
+
+	private void renderUI(Graphics g) {
+		g.drawString("HP: " + player.getHp() + " EXP: " + player.getExp()
+				+ " weapon: "
+				+ player.getDefaultBullet().getClass().getSimpleName(), 32, 4);
+		g.drawString("Player position: " + player.getBody().getX() + ", "
+				+ player.getBody().getY(), 32, 24);
 	}
-	
+
 	@Override
 	public void mouseClicked(int clickedBtn, int mouseX, int mouseY,
 			int clickCount) {
-		if(clickedBtn==0){
+		if (clickedBtn == 0) {
 			player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
-		}else if(clickedBtn==1){
-			if(player.onJoint){
+		} else if (clickedBtn == 1) {
+			if (player.onJoint) {
 				player.releaseJoint();
-			}else{
+			} else {
 				HookBullet hook = new HookBullet();
 				hook.setPlayer(player);
-				player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset, hook);
-			}	
+				player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset,
+						hook);
+			}
 		}
 	}
+
 	@Override
 	public void keyPressed(int paramInt, char paramChar) {
 		if (paramChar == 'w') {
@@ -200,13 +206,13 @@ public class PlayState extends BasicGameState {
 			s_pressed = true;
 		} else if (paramChar == 'd') {
 			d_pressed = true;
-		}else if(Character.isDigit(paramChar)){
-			int weaponCode=Character.getNumericValue(paramChar);
+		} else if (Character.isDigit(paramChar)) {
+			int weaponCode = Character.getNumericValue(paramChar);
 			player.setWeapon(weaponCode);
-		}else if(paramChar==27){
-			exitToMenu=true;
+		} else if (paramChar == 27) {
+			exitToMenu = true;
 		}
-		
+
 	}
 
 	@Override
@@ -223,8 +229,7 @@ public class PlayState extends BasicGameState {
 	}
 
 	public GameProgress getProgress() {
-		progress.hp=player.getHp();
-		progress.exp=player.getExp();
+		progress.player = player.stats;
 		return progress;
 	}
 
