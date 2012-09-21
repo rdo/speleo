@@ -18,7 +18,7 @@ public class NPC extends Person implements Controllable {
 	private static int MAX_HP = 3;
 	public float prevX;
 	public boolean jumped = false;
-	public boolean moveRigth = true;
+	public boolean moveRight = true;
 	// int hp=MAX_HP;
 
 	int startX;
@@ -45,6 +45,7 @@ public class NPC extends Person implements Controllable {
 		this.strategy = strategy;
 
 		stats.hp = 3;
+		stats.speed=3;
 		stats.bulletSpeed = 50;
 	}
 
@@ -77,7 +78,7 @@ public class NPC extends Person implements Controllable {
 	}
 
 	private void moveFromSideToSide() {
-		if (moveRigth) {
+		if (moveRight) {
 			stepRight();
 		} else {
 			stepLeft();
@@ -102,7 +103,7 @@ public class NPC extends Person implements Controllable {
 
 	@Override
 	public String toString() {
-		return "SimpleBot: moveRigtht=" + moveRigth + " state=" + currentState;
+		return "SimpleBot: moveRigtht=" + moveRight + " state=" + currentState;
 	}
 
 	public void setPlayer(Person player) {

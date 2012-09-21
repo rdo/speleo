@@ -7,7 +7,7 @@ public class SideToSideStrategy extends AbstractNpcStrategy {
 
 		float xDiff = Math.abs(self.prevX - self.getX());
 		if (xDiff < 1) {
-			self.moveRigth = !self.moveRigth;
+			self.moveRight = !self.moveRight;
 		}
 		self.prevX = self.getX();
 		if (r.nextInt() % 3 == 0) {

@@ -39,8 +39,8 @@
   <object x="1577" y="336" width="13" height="120"/>
   <object x="1356" y="394" width="40" height="42"/>
   <object name="enemy" x="515" y="679" width="24" height="25"/>
-  <object name="enemy" x="1299" y="75" width="24" height="25"/>
-  <object name="enemy" x="1092" y="324" width="24" height="25"/>
+  <object name="enemy" x="1351" y="68" width="24" height="25"/>
+  <object name="enemy" x="926" y="477" width="24" height="25"/>
   <object name="LightSpawner" x="615" y="5" width="20" height="22"/>
   <object x="1484" y="454" width="114" height="49"/>
   <object x="1260" y="522" width="72" height="137"/>
@@ -57,6 +57,6 @@
   <object x="21" y="586" width="29" height="44"/>
   <object x="110" y="487" width="263" height="50"/>
   <object x="143" y="614" width="97" height="97"/>
-  <object name="enemy" x="28" y="552" width="24" height="25"/>
+  <object name="enemy" x="215" y="450" width="24" height="25"/>
  </objectgroup>
 </map>

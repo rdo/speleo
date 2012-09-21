@@ -78,7 +78,7 @@ public class PlatformerLevel extends World {
 					player = new Player(this, x, y, stats);
 				} else if (name.equals("enemy")) {
 					String strategyName = map.getObjectProperty(i, j,
-							"strategy", "TurretStrategy");
+							"strategy", "GuardianStrategy");
 					NPC bot = new NPC(this, x, y,
 							AbstractNpcStrategy.createStrategy(strategyName));
 					npcs.add(bot);
