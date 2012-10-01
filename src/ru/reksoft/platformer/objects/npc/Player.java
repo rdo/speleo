@@ -11,8 +11,8 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import ru.reksoft.platformer.CharacterInfo;
 import ru.reksoft.platformer.ImageRegistry;
+import ru.reksoft.platformer.PersonStats;
 import ru.reksoft.platformer.objects.LightSource;
 import ru.reksoft.platformer.objects.repository.Bullet;
 import ru.reksoft.platformer.objects.repository.Flashlight;
@@ -24,7 +24,7 @@ public class Player extends Person implements LightSource, Controllable {
 
 	private Class<?> currentWeapon;
 
-	private int lightRadius = 5;
+	//private int lightRadius = 5;
 
 	private List<Class> weapons = new ArrayList<Class>(10);
 
@@ -43,18 +43,23 @@ public class Player extends Person implements LightSource, Controllable {
 
 	private Joint joint;
 	public HookBullet hookBullet;
+	
+	protected long lastEnergyRegenerate;
+	protected long lastShoot;
 
 	@Override
 	public void endJump() {
 		float yVelocity = getBody().getYVelocity();
+		//if jump height too big, player dies
 		if (yVelocity > 31) {
 			changeHp(-999);
 		}
 		super.endJump();
 	}
 
-	public Player(PlatformerLevel world, int x, int y, CharacterInfo stats) {
-		super(world, x, y, stats);
+	public Player(PlatformerLevel world, int x, int y, PersonStats stats) {
+		super(world, x, y);
+		setStats(stats);
 		for (int i = 0; i < 10; i++) {
 			weapons.add(null);
 		}
@@ -112,11 +117,11 @@ public class Player extends Person implements LightSource, Controllable {
 
 	@Override
 	public int getRadius() {
-		return lightRadius;
+		return currentEnergy/10+1;
 	}
 
 	@Override
-	public Bullet getDefaultBullet() {
+	public Bullet getCurrentBullet() {
 		try {
 			return (Bullet) currentWeapon.newInstance();
 		} catch (Exception e) {
@@ -138,7 +143,7 @@ public class Player extends Person implements LightSource, Controllable {
 
 	@Override
 	public void setRadius(int radius) {
-		lightRadius = radius;
+		
 
 	}
 
@@ -164,11 +169,38 @@ public class Player extends Person implements LightSource, Controllable {
 
 	@Override
 	public void update() {
+		
+		//we can't create hook in collision cycle checking;
+		//so we have to create it here
 		if (hookBullet != null && !onJoint) {
 			createJoint(hookBullet.xCollision, hookBullet.yCollision);
 			hookBullet = null;
 		}
+		regenerateEnergy();
 
+	}
+	@Override
+	
+	public void shootTo(int x, int y, Bullet b) {
+		//checking fireRate and current energy amount
+		long now=System.currentTimeMillis();
+		if(currentEnergy<=0){
+			return;
+		}
+		if(now-lastShoot>stats.fireRate){
+			super.shootTo(x, y, b);
+			lastShoot=now;
+			currentEnergy=currentEnergy-b.energyCost;
+		}
+		
+	}
+	public void regenerateEnergy(){
+		long now = System.currentTimeMillis();
+		if(currentEnergy<stats.maxEnergy && now-lastEnergyRegenerate>stats.energyRegeneration){
+			currentEnergy++;
+			lastEnergyRegenerate=now;
+		}
+		
 	}
 
 }

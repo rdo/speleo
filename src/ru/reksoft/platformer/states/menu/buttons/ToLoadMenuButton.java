@@ -11,7 +11,6 @@ public class ToLoadMenuButton extends AbstractMenuButton {
 
 	public ToLoadMenuButton() {
 		super();
-		text = "load game";
 	}
 
 	@Override
@@ -24,6 +23,12 @@ public class ToLoadMenuButton extends AbstractMenuButton {
 			game.enterState(Platformer.LOAD_GAME);
 		} catch (SlickException e) {
 		}
+	}
+
+	@Override
+	public String getText() {
+		// TODO Auto-generated method stub
+		return "load game";
 	}
 
 }

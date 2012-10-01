@@ -14,7 +14,6 @@ public class LoadGameButton extends AbstractMenuButton {
 	public LoadGameButton(GameProgress pro) {
 		super();
 		this.progress = pro;
-		text = progress.toString();
 	}
 
 	@Override
@@ -29,5 +28,11 @@ public class LoadGameButton extends AbstractMenuButton {
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	@Override
+	public String getText() {
+		// TODO Auto-generated method stub
+		return progress.toString();
 	}
 }

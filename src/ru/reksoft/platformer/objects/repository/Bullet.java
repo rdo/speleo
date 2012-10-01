@@ -18,6 +18,9 @@ public class Bullet implements DynamicGameObject {
 	protected PlatformerLevel world;
 
 	protected Body body;
+	
+	public int power=1;
+	public int energyCost=1;
 
 	private float x;
 	private float y;
@@ -61,7 +64,7 @@ public class Bullet implements DynamicGameObject {
 	@Override
 	public void collidesWith(DynamicGameObject other) {
 		if (other != null && other instanceof Destructable) {
-			((Destructable) other).changeHp(-1);
+			((Destructable) other).changeHp(-power);
 		}
 		float x = body.getX();
 		float y = body.getY();

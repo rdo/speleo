@@ -9,9 +9,10 @@ import org.newdawn.slick.state.StateBasedGame;
 import ru.reksoft.platformer.GameProgress;
 import ru.reksoft.platformer.SaveManager;
 import ru.reksoft.platformer.states.menu.buttons.LoadGameButton;
+import ru.reksoft.platformer.states.menu.buttons.Spacer;
 import ru.reksoft.platformer.states.menu.buttons.ToMainMenuButton;
 
-public class LoadState extends MainMenuState {
+public class LoadState extends AbstractMenuState {
 
 	private SaveManager manager = SaveManager.getInstance();
 
@@ -27,6 +28,7 @@ public class LoadState extends MainMenuState {
 		for (GameProgress gameProgress : saves) {
 			addButton(new LoadGameButton(gameProgress));
 		}
+		addButton(new Spacer());
 		addButton(new ToMainMenuButton());
 	}
 

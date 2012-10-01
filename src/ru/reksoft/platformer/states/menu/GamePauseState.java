@@ -6,11 +6,12 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import ru.reksoft.platformer.states.menu.buttons.ContinueButton;
 import ru.reksoft.platformer.states.menu.buttons.SaveButton;
+import ru.reksoft.platformer.states.menu.buttons.Spacer;
 import ru.reksoft.platformer.states.menu.buttons.ToMainMenuButton;
 
-public class ContinueGameState extends MainMenuState {
+public class GamePauseState extends AbstractMenuState {
 
-	public ContinueGameState(int id) {
+	public GamePauseState(int id) {
 		super(id);
 	}
 
@@ -19,6 +20,7 @@ public class ContinueGameState extends MainMenuState {
 			throws SlickException {
 		addButton(new ContinueButton());
 		addButton(new SaveButton());
+		addButton(new Spacer());
 		addButton(new ToMainMenuButton());
 	}
 

@@ -10,10 +10,6 @@ import ru.reksoft.platformer.states.play.PlayState;
 
 public class NewGameButton extends AbstractMenuButton {
 
-	public NewGameButton() {
-		text = "new game";
-	}
-
 	@Override
 	public void onClick(GameContainer gc, StateBasedGame game) {
 
@@ -27,6 +23,12 @@ public class NewGameButton extends AbstractMenuButton {
 
 		}
 
+	}
+
+	@Override
+	public String getText() {
+		// TODO Auto-generated method stub
+		return "new game";
 	}
 
 }

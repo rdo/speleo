@@ -5,7 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import ru.reksoft.platformer.states.menu.ContinueGameState;
+import ru.reksoft.platformer.states.menu.GamePauseState;
 import ru.reksoft.platformer.states.menu.MainMenuState;
 
 public class Platformer extends StateBasedGame {
@@ -42,7 +42,7 @@ public class Platformer extends StateBasedGame {
 		// no need to add this state now, it will be added when "new game"
 		// button will be pressed
 		// addState(new PlayState(GAMEPLAY_STATE, new GameProgress()));
-		addState(new ContinueGameState(PAUSE_STATE));
+		addState(new GamePauseState(PAUSE_STATE));
 
 	}
 

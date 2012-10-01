@@ -24,9 +24,14 @@ public class SaveButton extends AbstractMenuButton {
 
 	public SaveButton() {
 		super();
-		text = "save game";
 		manager = SaveManager.getInstance();
 
+	}
+
+	@Override
+	public String getText() {
+		// TODO Auto-generated method stub
+		return "save game";
 	}
 
 }

@@ -12,6 +12,11 @@ public class Flashlight extends Bullet implements LightSource, Controllable {
 
 	private int MAX_JUMP = 2;
 
+	public Flashlight() {
+		super();
+		energyCost=5;
+	}
+
 	@Override
 	public int getRadius() {
 		return radius;

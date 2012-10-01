@@ -13,8 +13,9 @@ public class ToMainMenuButton extends AbstractMenuButton {
 
 	}
 
-	public ToMainMenuButton() {
-		text = "back to main menu";
+	@Override
+	public String getText() {
+		return "back to main menu";
 	}
 
 }

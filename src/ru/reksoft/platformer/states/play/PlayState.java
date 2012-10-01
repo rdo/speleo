@@ -39,6 +39,8 @@ public class PlayState extends BasicGameState {
 	private GameProgress progress;
 
 	private boolean exitToMenu = false;
+	
+	private boolean leftMouseHold=false;
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1)
@@ -84,9 +86,9 @@ public class PlayState extends BasicGameState {
 			exitToMenu = false;
 		}
 
-		if (player.getHp() <= 0) {
-			arg1.enterState(Platformer.MAIN_MENU_STATE);
-		}
+		//if (player.getHp() <= 0) {
+		//	arg1.enterState(Platformer.MAIN_MENU_STATE);
+		//}
 
 		if (player.getX() < 0 || player.getX() > world.mapWidth
 				|| player.getY() < 0 || player.getY() > world.mapHeigth) {
@@ -126,6 +128,14 @@ public class PlayState extends BasicGameState {
 		}
 		if (s_pressed) {
 			player.stopMovement();
+		}
+		
+		if (leftMouseHold) {
+
+			int mouseX = arg0.getInput().getAbsoluteMouseX();
+			int mouseY = arg0.getInput().getAbsoluteMouseY();
+			player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
+
 		}
 
 		world.update(1);
@@ -172,18 +182,17 @@ public class PlayState extends BasicGameState {
 	}
 
 	private void renderUI(Graphics g) {
-		g.drawString("HP: " + player.getHp() + " EXP: " + player.getExp()
+		g.drawString("HP: " + player.getHp() + " EXP: " + player.getExp()+" Energy: "+player.getCurrentEnergy()
 				+ " weapon: "
-				+ player.getDefaultBullet().getClass().getSimpleName(), 32, 4);
-		g.drawString("Player position: " + player.getBody().getX() + ", "
-				+ player.getBody().getY(), 32, 24);
+				+ player.getCurrentBullet().getClass().getSimpleName(), 32, 4);
 	}
 
 	@Override
 	public void mouseClicked(int clickedBtn, int mouseX, int mouseY,
 			int clickCount) {
 		if (clickedBtn == 0) {
-			player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
+			//disabled; now using mouse-hold to fire
+			//player.shootTo(mouseX + world.xOffset, mouseY - world.yOffset);
 		} else if (clickedBtn == 1) {
 			if (player.onJoint) {
 				player.releaseJoint();
@@ -229,8 +238,24 @@ public class PlayState extends BasicGameState {
 	}
 
 	public GameProgress getProgress() {
-		progress.player = player.stats;
+		progress.player = player.getStats();
 		return progress;
+	}
+
+	@Override
+	public void mousePressed(int button, int x, int y) {
+		if(button==0){
+			leftMouseHold=true;
+			//leftMouseHoldStarted=System.currentTimeMillis();
+		}
+	}
+
+	@Override
+	public void mouseReleased(int button, int x, int y) {
+		if(leftMouseHold && button==0){
+			leftMouseHold=false;
+			//leftMouseHoldStarted=0;
+		}
 	}
 
 }

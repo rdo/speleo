@@ -1,20 +1,26 @@
 package ru.reksoft.platformer;
 
-public class CharacterInfo {
+public class PersonStats {
 
 	public int jumpPower;
 	public int speed;
 	public int exp;
-	public int hp;
+	public int maxHp;
 	public int maxJumpCount;
 	public int bulletSpeed;
-	public CharacterInfo() {
+	public int fireRate;
+	public int maxEnergy;
+	public int energyRegeneration;
+	public PersonStats() {
 		jumpPower = 15;
 		speed = 5;
 		exp = 0;
-		hp = 5;
+		maxHp = 10;
 		maxJumpCount = 1;
 		bulletSpeed = 40;
+		fireRate=250;
+		maxEnergy=45;
+		energyRegeneration=500;
 	}
 	
 	

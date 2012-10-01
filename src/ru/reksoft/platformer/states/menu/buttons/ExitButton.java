@@ -11,8 +11,10 @@ public class ExitButton extends AbstractMenuButton {
 
 	}
 
-	public ExitButton() {
-		text = "exit";
+	@Override
+	public String getText() {
+		// TODO Auto-generated method stub
+		return "exit";
 	}
 
 }

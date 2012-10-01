@@ -6,6 +6,10 @@ import org.newdawn.fizzy.Body;
 import org.newdawn.fizzy.Rectangle;
 import org.newdawn.fizzy.Shape;
 
+import ru.reksoft.platformer.objects.npc.NPC;
+import ru.reksoft.platformer.objects.npc.Person;
+import ru.reksoft.platformer.states.play.PlatformerLevel;
+
 public class GuardianStrategy extends AbstractNpcStrategy{
 	
 	boolean inited=false;
@@ -16,12 +20,11 @@ public class GuardianStrategy extends AbstractNpcStrategy{
 	float prevX;
 	
 	@Override
-	public void update() {
+	public void update(PlatformerLevel world, NPC self, Person player) {
 		if(!inited){
 			if(self.getLastCollision()==null){
 				return;
 			}
-			System.out.println("guardian inited");
 			inited=true;
 			Body b = self.getLastCollision();
 			float xPos=b.getX();

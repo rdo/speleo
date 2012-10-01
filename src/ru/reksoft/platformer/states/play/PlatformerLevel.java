@@ -10,7 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.tiled.TiledMap;
 
-import ru.reksoft.platformer.CharacterInfo;
+import ru.reksoft.platformer.PersonStats;
 import ru.reksoft.platformer.objects.npc.NPC;
 import ru.reksoft.platformer.objects.npc.Player;
 import ru.reksoft.platformer.objects.npc.strategies.AbstractNpcStrategy;
@@ -48,7 +48,7 @@ public class PlatformerLevel extends World {
 		super(worldWidth, worldHeight);
 	}
 
-	public PlatformerLevel(TiledMap map, CharacterInfo stats) {
+	public PlatformerLevel(TiledMap map, PersonStats stats) {
 
 		super(0, 0, map.getWidth() * map.getTileWidth(), map.getHeight()
 				* map.getTileHeight(), 1, 1);

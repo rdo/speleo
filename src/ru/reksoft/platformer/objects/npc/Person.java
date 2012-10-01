@@ -5,7 +5,7 @@ import org.newdawn.fizzy.Body;
 import org.newdawn.fizzy.Circle;
 import org.newdawn.slick.Graphics;
 
-import ru.reksoft.platformer.CharacterInfo;
+import ru.reksoft.platformer.PersonStats;
 import ru.reksoft.platformer.objects.Destructable;
 import ru.reksoft.platformer.objects.DynamicGameObject;
 import ru.reksoft.platformer.objects.repository.Bullet;
@@ -13,7 +13,7 @@ import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public abstract class Person implements DynamicGameObject, Destructable {
 
-	public CharacterInfo stats;
+	protected PersonStats stats;
 
 	protected Body body;
 	
@@ -21,19 +21,24 @@ public abstract class Person implements DynamicGameObject, Destructable {
 
 	boolean is_jumping = false;
 	boolean allow_next_jump = true;
+	protected int jump_count = 0;
+	
+	protected int currentHp;
+	
+	protected int currentEnergy;
+	
 	public State currentState;
 
 	boolean looksRight = true;
 
-	protected int jump_count = 0;
-	
 	protected Body lastCollision;
 
 	protected Class bulletClass = Bullet.class;
 
-	public Person(PlatformerLevel world, int x, int y, CharacterInfo stats) {
+	public Person(PlatformerLevel world, int x, int y) {
 		this.world = world;
-		this.stats = stats;
+		this.stats=new PersonStats();
+		currentHp=stats.maxHp;
 		body = new Body(new Circle(20.0f), x, y);
 		body.setFriction(0);
 		world.add(body);
@@ -140,11 +145,11 @@ public abstract class Person implements DynamicGameObject, Destructable {
 
 	@Override
 	public String toString() {
-		return "Person: hp=" + stats.hp + ", state=" + currentState;
+		return "Person: hp=" + stats.maxHp + ", state=" + currentState;
 	}
 
 	public void shootTo(int x, int y) {
-		Bullet b = getDefaultBullet();
+		Bullet b = getCurrentBullet();
 		shootTo(x, y, b);
 
 	}
@@ -192,12 +197,17 @@ public abstract class Person implements DynamicGameObject, Destructable {
 
 	@Override
 	public int getHp() {
-		return stats.hp;
+		return currentHp;
 	}
 
 	@Override
 	public void changeHp(int value) {
-		stats.hp = stats.hp + value;
+		int newHp = currentHp + value;
+		if(newHp>stats.maxHp){
+			currentHp=stats.maxHp;
+		}else{
+			currentHp=newHp;
+		}
 
 	}
 
@@ -209,7 +219,7 @@ public abstract class Person implements DynamicGameObject, Destructable {
 		this.stats.exp = exp;
 	}
 
-	public Bullet getDefaultBullet() {
+	public Bullet getCurrentBullet() {
 		try {
 			return (Bullet) bulletClass.newInstance();
 		} catch (Exception e) {
@@ -222,17 +232,19 @@ public abstract class Person implements DynamicGameObject, Destructable {
 		this.bulletClass = bulletClass;
 	}
 
-	public CharacterInfo getStats() {
+	public PersonStats getStats() {
 		return stats;
 	}
 
-	public void setStats(CharacterInfo stats) {
+	public void setStats(PersonStats stats) {
 		this.stats = stats;
+		this.currentHp=stats.maxHp;
+		this.currentEnergy=stats.maxEnergy;
 	}
 
 	@Override
 	public void setHp(int value) {
-		stats.hp = value;
+		currentHp=value;
 
 	}
 
@@ -242,6 +254,15 @@ public abstract class Person implements DynamicGameObject, Destructable {
 
 	public void setLastCollision(Body lastCollision) {
 		this.lastCollision = lastCollision;
+	}
+	
+
+	public int getCurrentEnergy() {
+		return currentEnergy;
+	}
+
+	public void setCurrentEnergy(int currentEnergy) {
+		this.currentEnergy = currentEnergy;
 	}
 
 }

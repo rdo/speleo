@@ -8,7 +8,7 @@
  </tileset>
  <layer name="level" width="50" height="80">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2YW2oDMQxFHUhaSNM86F/ob3fSJXT/a6lNKjDClt9TAueAIGRmIl1bD09uzrlXb9/e9t7eOuzq7d09OHq7GfftjOu9vneR/x/Xz/5vLfTn1H2x5hmEdYt1bIWlswfRcfF2iuyl8vlDw70jBD8nl49RdOhcrV2r8PzFrdeia1bn5UhehTU6u8catObI6D6GuGfp6K1X0T9Sk7q+Rutcr0sJ0TCzt8S/qeu81s4uXx+p2hR/rT6tHJS9GLVcfbT+vjU3rb2bpSPnw5rpKbPmptVHpJddG/3lzgIpHVvO115/pX61QofVr0f8Wc+u0GHl2DPp0MQ9Uc+kVL+0zjX/qSM+r+gcL71/6DnaosNao1zeHwrXa2IpUXrP0NekN7T275r5v9WZVUidXWfp0DM53v/V+kpxtujQ98SzfqRWa3Jb9sfKz5p3omPmuxk6Qgz3ihhmUNJRey7NrfnH5Hhb6DlD5vbtc3WwBj3/YeVy52t1sAAAAAAAAAAAAAAAAAAAAAAAAAAAAE/GL0KbvY2APgAA
+   H4sIAAAAAAAAC+1a22rDMAx1odug63phb2Wv+5N9wv7/W5bQGYwmyZKlJGWcA4LR2JGPbF2s7FpKeZnka5L9JK8DcpnkrdxxmOSqjNspz0d17xr932Uc+19b0L+5cS3nDMx2a3msBY3nCCqP8yTHRp6N858cYyOY9RyLvMbKg55Vq63m+eeyPBfqs/RcRs7VbKNTudvAe0ai+zivO4vHqL9W/hGfpP4V9XNqlx4qh8zY0r6T+rlVTkX2D843qz6vTu0M1r2IiuQf3vdreVPbuywekg4tp3Oi5U0tjtRYdnHqk2oBjsea+XVUXy9eLcFDi9cRfdrcJXgspW8LHlKcozmJi5daXbM2D2vM6d0/aB718NBsJJ37ds5o7Oyhd8+gzzR7avaw5oA1atbemjJ40Jzc7mUmP21Nmv+O5uSD8swD6g+eNWXUFlk8Zh+5lbx+gre2aHlY61Lp/L0P2sAD6f4xUkNK+/aRvuq/kHiM9LCk+Psp/G6NJdTHuLFb9X1a3T399GxwY8Ejjq15ZOXIrXlk5ZYleHh6F21O1vT36n9LzOZ4cLWg1BeN3s05/d7cU+3A1TJSvvOeD8u8KA9PbbwVD0tfXMvF0r1mbR5L3Xe5+6elF/noPHo9giiP0X6ylLe49dT+9dk5z8oj4/umxT9a/5Liax1j6bta6+IIenbdsv7y4L/xkHwh8q27V5dEv99wPHq5UvN5z7u9Yo1rltql7ok39md9J4rYQIqz2hmkGP0/FY/0uNDYuGYMBQAAAAAAAAAAAAAAAAAAAAAAAIBHxQ9aFpfDgD4AAA==
   </data>
  </layer>
  <objectgroup name="objects" width="50" height="80">
@@ -21,7 +21,7 @@
   <object x="23" y="104" width="124" height="47"/>
   <object x="429" y="168" width="34" height="43"/>
   <object x="653" y="21" width="39" height="33"/>
-  <object name="HealingPotion" x="963" y="231" width="19" height="21"/>
+  <object name="HealingPotion" x="34" y="551" width="19" height="21"/>
   <object name="enemy" x="796" y="238" width="24" height="25"/>
   <object x="686" y="265" width="613" height="45"/>
   <object x="843" y="233" width="103" height="32"/>
@@ -37,26 +37,52 @@
   <object x="1549" y="11" width="42" height="326"/>
   <object x="1519" y="236" width="42" height="102"/>
   <object x="1577" y="336" width="13" height="120"/>
-  <object x="1356" y="394" width="40" height="42"/>
-  <object name="enemy" x="515" y="679" width="24" height="25"/>
+  <object x="1356" y="394" width="42" height="134"/>
+  <object name="enemy" x="456" y="672" width="24" height="25"/>
   <object name="enemy" x="1351" y="68" width="24" height="25"/>
-  <object name="enemy" x="926" y="477" width="24" height="25"/>
+  <object name="enemy" x="1168" y="576" width="24" height="25"/>
   <object name="LightSpawner" x="615" y="5" width="20" height="22"/>
-  <object x="1484" y="454" width="114" height="49"/>
-  <object x="1260" y="522" width="72" height="137"/>
-  <object x="844" y="518" width="232" height="40"/>
-  <object x="878" y="562" width="198" height="34"/>
-  <object x="1006" y="597" width="70" height="60"/>
-  <object x="717" y="651" width="69" height="39"/>
+  <object x="1358" y="456" width="232" height="52"/>
+  <object x="1260" y="522" width="329" height="172"/>
+  <object x="844" y="518" width="236" height="103"/>
+  <object x="843" y="614" width="430" height="80"/>
+  <object x="717" y="651" width="144" height="43"/>
   <object x="748" y="690" width="6" height="89"/>
   <object x="142" y="712" width="416" height="81"/>
   <object x="557" y="21" width="39" height="33"/>
   <object x="-11" y="337" width="469" height="36"/>
   <object x="428" y="373" width="29" height="30"/>
-  <object x="5" y="370" width="14" height="297"/>
+  <object x="5" y="370" width="17" height="972"/>
   <object x="21" y="586" width="29" height="44"/>
   <object x="110" y="487" width="263" height="50"/>
   <object x="143" y="614" width="97" height="97"/>
   <object name="enemy" x="215" y="450" width="24" height="25"/>
+  <object name="enemy" x="762" y="610" width="24" height="25"/>
+  <object x="21" y="967" width="449" height="48"/>
+  <object x="360" y="906" width="111" height="68"/>
+  <object x="680" y="970" width="203" height="267"/>
+  <object x="884" y="969" width="161" height="105"/>
+  <object x="938" y="781" width="106" height="198"/>
+  <object x="890" y="1162" width="537" height="43"/>
+  <object x="883" y="1076" width="34" height="103"/>
+  <object x="1256" y="777" width="142" height="300"/>
+  <object x="1192" y="1004" width="72" height="73"/>
+  <object x="1389" y="967" width="38" height="111"/>
+  <object x="1546" y="690" width="47" height="762"/>
+  <object name="HealingPotion" x="1411" y="929" width="19" height="21"/>
+  <object name="enemy" x="317" y="929" width="24" height="25"/>
+  <object name="enemy" x="825" y="925" width="24" height="25"/>
+  <object name="enemy" x="1135" y="1121" width="24" height="25"/>
+  <object name="enemy" x="1319" y="736" width="24" height="25"/>
+  <object x="394" y="1012" width="76" height="225"/>
+  <object x="682" y="1321" width="557" height="108"/>
+  <object x="1240" y="1351" width="306" height="75"/>
+  <object x="265" y="1415" width="202" height="49"/>
+  <object x="232" y="1351" width="139" height="48"/>
+  <object x="198" y="1196" width="80" height="137"/>
+  <object x="106" y="1191" width="172" height="45"/>
+  <object x="138" y="1132" width="42" height="67"/>
+  <object x="4" y="1320" width="114" height="148"/>
+  <object x="120" y="1416" width="31" height="48"/>
  </objectgroup>
 </map>

@@ -8,29 +8,10 @@ import ru.reksoft.platformer.states.play.PlatformerLevel;
 
 public abstract class AbstractNpcStrategy implements NpcStrategy {
 
-	protected PlatformerLevel world;
-	protected NPC self;
-	protected Person player;
-
 	protected Random r = new Random();
 
 	@Override
-	public void setWorld(PlatformerLevel world) {
-		this.world = world;
-	}
-
-	@Override
-	public void setNpc(NPC npc) {
-		self = npc;
-	}
-
-	@Override
-	public void setPlayer(Person player) {
-		this.player = player;
-	}
-
-	@Override
-	public abstract void update();
+	public abstract void update(PlatformerLevel world, NPC self, Person player);
 
 	public static NpcStrategy createStrategy(String strategyName) {
 		NpcStrategy strategy;
